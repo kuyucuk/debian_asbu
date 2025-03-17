@@ -22,19 +22,43 @@ class User extends ActiveRecord
             ['email', 'unique'],
         ];
     }
+    public function attributeLabels()
+{
+    return [
+        'id' => 'ID',
+        'ad' => 'Adı',
+        'soyad' => 'Soyadı',
+        'email' => 'E-Posta',
+        'kullanici_adi' => 'Kullanıcı Adı',
+        'unvan' => 'Ünvan',
+        'telefon' => 'Telefon',
+        //'password_hash' => 'Şifre',
+    ];
+}
+
 
     // Şifreyi hashleme metodu
     public function setPassword($password)
     {
+        //email bazlı hashleme yapmak istersek bu kodu kullanıyoruz.
         if (!empty($this->email)) {
             $salt = md5($this->email); 
             $this->password_hash = Yii::$app->security->generatePasswordHash($password . $salt);
         }
+
+
+        //email ile değil de salt şifreleme kodu
+        /*if (!empty($password)) { 
+            $this->password_hash = Yii::$app->security->generatePasswordHash($password);
+        }*/
     }
 
     // Şifre doğrulama metodu
     public function validatePassword($password)
     {
+        //salt şifrelemenin doğrulama kodu
+        //return Yii::$app->security->validatePassword($password, $this->password_hash);
+
         if (!empty($this->email)) {
             $salt = md5($this->email);
             return Yii::$app->security->validatePassword($password . $salt, $this->password_hash);
@@ -63,7 +87,7 @@ class User extends ActiveRecord
     // Kayıttan önce kullanıcı adını oluşturma
     public function beforeSave($insert)
     {
-        if ($this->isNewRecord) {
+        if ($this->isNewRecord && empty($this->kullanici_adi) && !empty($this->ad) && !empty($this->soyad)) { //ad ve soyadın boş gelmemesi gerektiğini söylüyor
             $this->kullanici_adi = $this->generateUsername($this->ad, $this->soyad);
         }
 

@@ -22,7 +22,7 @@ class Department extends ActiveRecord
         return [
             [['department_name'], 'required'],
             [['department_name'], 'string', 'max' => 255],
-            [['department_name'], 'unique'],
+            //[['department_name'], 'unique'],
         ];
     }
 

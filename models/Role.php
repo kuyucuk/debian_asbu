@@ -23,7 +23,7 @@ class Role extends ActiveRecord
         return [
             [['role_name'], 'required'],
             [['role_name'], 'string', 'max' => 255],
-            [['role_name'], 'unique'],
+            //[['role_name'], 'unique'],
         ];
     }
 
