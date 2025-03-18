@@ -2,50 +2,42 @@
 
 /** @var yii\web\View $this */
 
-$this->title = 'My Yii Application';
+$this->title = 'PPD';
 ?>
 <div class="site-index">
 
     <div class="jumbotron text-center bg-transparent mt-5 mb-5">
-        <h1 class="display-4">Congratulations!</h1>
+        <h1 class="display-4">İDARİ PERSONEL PERFORMANS ÖLÇÜMÜ</h1>
 
-        <p class="lead">You have successfully created your Yii-powered application.</p>
+        <p class="lead">Ankara Sosyal Bilimler Üniversitesi</p>
 
-        <p><a class="btn btn-lg btn-success" href="https://www.yiiframework.com">Get started with Yii</a></p>
+        <p><a class="btn btn-lg btn-success" href="http://localhost:8080/index.php?r=site%2Flogin">Giriş Yapmak İçin Tıklayın</a></p>
     </div>
 
     <div class="body-content">
 
         <div class="row">
             <div class="col-lg-4 mb-3">
-                <h2>Heading</h2>
+                <h2>Son Kullanıcı Aşaması</h2>
 
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                    fugiat nulla pariatur.</p>
+                <p>Çalışanlar sistemden bilgilerini çekip sertifikalarını yükleyebilir.</p>
 
-                <p><a class="btn btn-outline-secondary" href="https://www.yiiframework.com/doc/">Yii Documentation &raquo;</a></p>
+                <p><a class="btn btn-outline-secondary" href="https://www.yiiframework.com/doc/">Döküman &raquo;</a></p>
             </div>
             <div class="col-lg-4 mb-3">
-                <h2>Heading</h2>
+                <h2>Üst Yönetici Aşaması</h2>
 
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                    fugiat nulla pariatur.</p>
+                <p>Yöneticiler girilen bilgileri onaylayıp iş becerisi bölümünü değerlendirir.</p>
 
-                <p><a class="btn btn-outline-secondary" href="https://www.yiiframework.com/forum/">Yii Forum &raquo;</a></p>
+                <p><a class="btn btn-outline-secondary" href="https://www.yiiframework.com/forum/">Forum &raquo;</a></p>
             </div>
             <div class="col-lg-4">
-                <h2>Heading</h2>
+                <h2>Genel Değerlendirme Aşaması</h2>
 
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                    fugiat nulla pariatur.</p>
+                <p>Puanlar toplanıp raporlanır.</p>
 
-                <p><a class="btn btn-outline-secondary" href="https://www.yiiframework.com/extensions/">Yii Extensions &raquo;</a></p>
+                <p><a class="btn btn-outline-secondary" href="https://www.yiiframework.com/extensions/">Eklentiler &raquo;</a></p>
+                
             </div>
         </div>
 

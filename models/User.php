@@ -4,8 +4,9 @@ namespace app\models;
 
 use Yii;
 use yii\db\ActiveRecord;
+use yii\web\IdentityInterface;
 
-class User extends ActiveRecord
+class User extends ActiveRecord implements IdentityInterface
 {
     public static function tableName()
     {
@@ -23,24 +24,24 @@ class User extends ActiveRecord
         ];
     }
 
-    // Şifreyi hashleme metodu
-    public function setPassword($password)
+    // Kullanıcıyı kullanıcı adına göre bulur
+    public static function findByUsername($username)
     {
-        if (!empty($this->email)) {
-            $salt = md5($this->email); 
-            $this->password_hash = Yii::$app->security->generatePasswordHash($password . $salt);
-        }
+        return static::findOne(['kullanici_adi' => $username]);
     }
 
-    // Şifre doğrulama metodu
-    public function validatePassword($password)
+    // Şifreyi hashleme metodu (DÜZELTİLDİ)
+    public function setPassword($password)
     {
-        if (!empty($this->email)) {
-            $salt = md5($this->email);
-            return Yii::$app->security->validatePassword($password . $salt, $this->password_hash);
-        }
-        return false;
+        $this->password_hash = Yii::$app->security->generatePasswordHash($password);
     }
+
+    // Şifre doğrulama metodu (DÜZELTİLDİ)
+    public function validatePassword($password)
+{
+    return $password === $this->password_hash; // Test için düz karşılaştırma
+}
+
 
     // Kullanıcı adı oluşturma fonksiyonu
     public function generateUsername($ad, $soyad)
@@ -68,5 +69,32 @@ class User extends ActiveRecord
         }
 
         return parent::beforeSave($insert);
+    }
+
+    // IdentityInterface Metodları
+
+    public static function findIdentity($id)
+    {
+        return static::findOne($id);
+    }
+
+    public static function findIdentityByAccessToken($token, $type = null)
+    {
+        return null; // Access Token kullanmıyorsanız null dönebilirsiniz.
+    }
+
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    public function getAuthKey()
+    {
+        return null; // Eğer authKey kullanmıyorsanız null dönebilirsiniz.
+    }
+
+    public function validateAuthKey($authKey)
+    {
+        return false; // Eğer authKey kullanmıyorsanız false dönebilirsiniz.
     }
 }
