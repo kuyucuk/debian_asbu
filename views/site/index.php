@@ -11,7 +11,7 @@ $this->title = 'PPD';
 
         <p class="lead">Ankara Sosyal Bilimler Üniversitesi</p>
 
-        <p><a class="btn btn-lg btn-success" href="http://localhost:8080/index.php?r=site%2Flogin">Giriş Yapmak İçin Tıklayın</a></p>
+        <p><a class="btn btn-lg btn-success" href="/index.php?r=site%2Flogin">Giriş Yapmak İçin Tıklayın</a></p>
     </div>
 
     <div class="body-content">
@@ -22,7 +22,7 @@ $this->title = 'PPD';
 
                 <p>Çalışanlar sistemden bilgilerini çekip sertifikalarını yükleyebilir.</p>
 
-                <p><a class="btn btn-outline-secondary" href="https://www.yiiframework.com/doc/">Döküman &raquo;</a></p>
+                <p><a class="btn btn-outline-secondary" href="/index.php?r=self-assessment">Giriş &raquo;</a></p>
             </div>
             <div class="col-lg-4 mb-3">
                 <h2>Üst Yönetici Aşaması</h2>

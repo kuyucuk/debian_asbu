@@ -2,12 +2,11 @@
 
 return [
     'class' => 'yii\db\Connection',
-    'dsn' => 'mysql:host=10.0.47.121;dbname=universite_degerlendirme',
-    'username' => 'performanceapp',
-    'password' => 'Asbu&2022*',
+    'dsn' => 'mysql:host=127.0.0.1;port=3306;dbname=ppd_university',
+    'username' => 'root',
+    'password' => '',
     'charset' => 'utf8',
 
-    // dbname=universite_degerlendirme
     // Schema cache options (for production environment)
     //'enableSchemaCache' => true,
     //'schemaCacheDuration' => 60,

@@ -1,55 +1,47 @@
 <?php
+#session_start();
+include 'db.php';
 
-/** @var yii\web\View $this */
-/** @var yii\bootstrap5\ActiveForm $form */
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $email = $_POST['email'];
+    $password = $_POST['password'];
 
-/** @var app\models\LoginForm $model */
+    $stmt = $pdo->prepare("SELECT * FROM users WHERE email = ?");
+    $stmt->execute([$email]);
+    $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
-use yii\bootstrap5\ActiveForm;
-use yii\bootstrap5\Html;
-
-$this->title = 'Giriş';
-$this->params['breadcrumbs'][] = $this->title;
+    if ($user && password_verify($password, $user['password'])) {
+        $_SESSION['admin'] = $user['id'];
+        header("Location: dashboard.php");
+        exit;
+    } else {
+        $error = "Geçersiz giriş bilgileri!";
+    }
+}
 ?>
-<div class="site-login">
-    <h1><?= Html::encode($this->title) ?></h1>
 
-    <p>Lütfen giriş yapmak için aşağıdaki alanları doldurun:</p>
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <title>Giriş</title>
+    <link rel="stylesheet" href="styles.css">
 
-    <div class="row">
-        <div class="col-lg-5">
+</head>
+<body>
+    <div class="login-container">
+        <h2>Lütfen ASBÜ kullanıcı bilgileriniz ile giriş yapınız</h2>
+        <?php if (isset($error)) echo "<p style='color:red;'>$error</p>"; ?>
+        <form method="POST">
+            <input type="email" name="email" placeholder="E-posta" required><br>
+            <input type="password" name="password" placeholder="Şifre" required><br>
+            <button type="submit" class="login-button">Giriş Yap</button>
+        </form>
 
-            <?php $form = ActiveForm::begin([
-                'id' => 'login-form',
-                'fieldConfig' => [
-                    'template' => "{label}\n{input}\n{error}",
-                    'labelOptions' => ['class' => 'col-lg-1 col-form-label mr-lg-3'],
-                    'inputOptions' => ['class' => 'col-lg-3 form-control'],
-                    'errorOptions' => ['class' => 'col-lg-7 invalid-feedback'],
-                ],
-            ]); ?>
-
-            <?= $form->field($model, 'username')->textInput(['autofocus' => true]) ?>
-
-            <?= $form->field($model, 'password')->passwordInput() ?>
-
-            <?= $form->field($model, 'rememberMe')->checkbox([
-                'template' => "<div class=\"custom-control custom-checkbox\">{input} {label}</div>\n<div class=\"col-lg-8\">{error}</div>",
-            ]) ?>
-
-            <div class="form-group">
-                <div>
-                    <?= Html::submitButton('Login', ['class' => 'btn btn-primary', 'name' => 'login-button']) ?>
-                </div>
-            </div>
-
-            <?php ActiveForm::end(); ?>
-
-            <div style="color:#999;">
-                <strong>admin/admin</strong> veya <strong>demo/demo</strong> ile giriş yapabilirsiniz.<br>
-                Kullanıcı adı/şifreyi değiştirmek için lütfen <code>app\models\User::$users</code> kodunu kontrol edin.
-            </div>
-
+        <!-- Kayıt Ol & Şifre Sıfırlama -->
+        <div class="extra-links">
+            <p><a href="register.php">Kayıt Ol</a> | <a href="forgot_password.php">Şifremi Unuttum</a></p>
         </div>
     </div>
-</div>
+</body>
+</html>

@@ -9,10 +9,15 @@ class m250312_060016_user_manager_table extends Migration
      */
     public function safeUp()
     {
+
+        //$this->createTable('user_manager', [
         $this->createTable('{{%user_manager}}', [
             'id' => $this->primaryKey(),
+            //'id' => $this->integer()->primaryKey(),
             'user_id' => $this->integer()->notNull(),   // Kullanıcı ID'si
+            'user_name' => $this->string(255)->notNull(),
             'manager_id' => $this->integer()->notNull(), // Yönetici ID'si
+            'manager_name' => $this->string(255)->notNull(),
             'created_at' => $this->timestamp()->defaultExpression('CURRENT_TIMESTAMP'),
             'updated_at' => $this->timestamp()->defaultExpression('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'),
         ]);
@@ -50,8 +55,7 @@ class m250312_060016_user_manager_table extends Migration
         // Tabloyu kaldır
         $this->dropTable('user_manager');
     }
-
-    /*
+/*
     // Use up()/down() to run migration code without a transaction.
     public function up()
     {
@@ -66,3 +70,5 @@ class m250312_060016_user_manager_table extends Migration
     }
     */
 }
+    
+

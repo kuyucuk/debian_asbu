@@ -20,9 +20,11 @@ class Department extends ActiveRecord
     public function rules()
     {
         return [
-            [['department_name'], 'required'],
-            [['department_name'], 'string', 'max' => 255],
+            
+            [['department_name', 'department_type'], 'required'],
+            [['department_name', 'department_type'], 'string', 'max' => 255],
             [['department_name'], 'unique'],
+            
         ];
     }
 
@@ -30,7 +32,8 @@ class Department extends ActiveRecord
     {
         return [
             'id' => 'ID',
-            'department_name' => 'Department Name',
+            'department_name' => 'Departman',
+            'department_type' => 'Departman Türü',
         ];
     }
 //user-department da id kullanılıyor
