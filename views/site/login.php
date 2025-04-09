@@ -30,7 +30,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 </head>
 <body>
     <div class="login-container">
-        <h2>Lütfen ASBÜ kullanıcı bilgileriniz ile giriş yapınız</h2>
+        <h2>ASBÜ kullanıcı bilgileriniz ile giriş yapınız</h2>
         <?php if (isset($error)) echo "<p style='color:red;'>$error</p>"; ?>
         <form method="POST">
             <input type="email" name="email" placeholder="E-posta" required><br>
