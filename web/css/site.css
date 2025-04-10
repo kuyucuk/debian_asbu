@@ -1,118 +1,129 @@
+/* ========== GENEL SAYFA DÜZENİ ========== */
+/* 100vh sorunu: min-height ve overflow ekledik */
+body {
+    font-family: Arial, sans-serif;
+    background: #FFFfff;
+    min-height: 100vh; /* Sabit yükseklik yerine */
+    margin: 0;
+    display: flex;
+    flex-direction: column; /* İçerik akışını düzelttik */
+}
+
 main > .container {
     padding: 70px 15px 20px;
+    flex: 1; /* Alt içerik kaymasını önler */
+    overflow: auto; /* Taşan içerik için kaydırma */
 }
 
-.footer {
-    background-color: #f5f5f5;
-    font-size: .9em;
-    height: 60px;
+/* ========== NAVBAR İYİLEŞTİRMELERİ ========== */
+.navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    min-height: 60px; /* Sabit yükseklik sorunu çözümü */
+    flex-wrap: wrap; /* Mobilde satır kayması için */
 }
 
-.footer > .container {
-    padding-right: 15px;
-    padding-left: 15px;
+.navbar-dark {
+    background-color: #793657 !important;
 }
 
-.not-set {
-    color: #c55;
-    font-style: italic;
-}
-
-/* add sorting icons to gridview sort links */
-a.asc:after, a.desc:after {
-    content: '';
-    left: 3px;
-    display: inline-block;
-    width: 0;
-    height: 0;
-    border: solid 5px transparent;
-    margin: 4px 4px 2px 4px;
-    background: transparent;
-}
-
-a.asc:after {
-    border-bottom: solid 7px #800000;
-    border-top-width: 0;
-}
-
-a.desc:after {
-    border-top: solid 7px #800000;
-    border-bottom-width: 0;
-}
-
-.grid-view th {
-    white-space: nowrap;
-}
-
-.hint-block {
-    display: block;
-    margin-top: 5px;
-    color: #999;
-}
-
-.error-summary {
-    color: #a94442;
-    background: #fdf7f7;
-    border-left: 3px solid #eed3d7;
-    padding: 10px 20px;
-    margin: 0 0 15px 0;
-}
-
-/* align the logout "link" (button in form) of the navbar */
-.nav li > form > button.logout {
-    padding-top: 7px;
-    color: rgba(114, 27, 27, 0.5);
-}
-
+/* Mobil menü için optimize stil */
 @media(max-width:767px) {
-    .nav li > form > button.logout {
-        display:block;
-        text-align: left;
-        width: 100%;
-        padding: 10px 0;
+    .navbar-collapse {
+        padding: 15px 0;
+    }
+    
+    .nav-link {
+        padding: 10px 15px !important;
     }
 }
 
-.nav > li > form > button.logout:focus,
-.nav > li > form > button.logout:hover {
-    text-decoration: none;
-    color: rgba(255, 255, 255, 0.75);
+/* ========== GİRİŞ FORMU RESPONSIVE DÜZEN ========== */
+.login-container {
+    background: white;
+    padding: 30px; /* rem yerine px */
+    border-radius: 10px;
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    width: 90%; /* min() fonksiyonu kaldırıldı */
+    max-width: 400px; /* Sabit maksimum genişlik */
+    margin: 0 auto; /* Eski ortalama yöntemi */
 }
 
-.nav > li > form > button.logout:focus {
-    outline: none;
+/* Yazı boyutlarını responsive yapalım */
+h2 {
+    color: #800000;
+    margin-bottom: 1.25rem;
+    font-size: clamp(1.5rem, 4vw, 2rem); /* Dinamik font boyutu */
 }
 
+/* ========== RESPONSIVE TABLO STİLLERİ ========== */
+.grid-view th {
+    white-space: nowrap;
+    font-size: 0.9rem; /* Küçük ekranlar için */
+}
+
+@media(max-width: 992px) {
+    .grid-view table {
+        display: block;
+        overflow-x: auto; /* Yatay kaydırma için */
+    }
+}
+
+/* ========== FOOTER DÜZENİ ========== */
+.footer {
+    background-color: #f5f5f5;
+    font-size: .9em;
+    min-height: 60px; /* Sabit yükseklik sorunu çözümü */
+    display: flex;
+    align-items: center;
+}
+
+.footer > .container {
+    padding: 15px;
+    width: 100%;
+    text-align: center;
+}
+
+/* ========== DİĞER İYİLEŞTİRMELER ========== */
+/* Tüm padding/margin'leri relative unit yapalım */
 .form-group {
     margin-bottom: 1rem;
 }
 
-/* Genel Sayfa Stili */
+button {
+    padding: 0.625rem 1rem; /* 10px 16px yerine */
+    font-size: 1rem;
+}
+
+/* Yazıların zoom'da kaybolmaması için */
 body {
-    font-family: Arial, sans-serif;
-    background: #FFFfff; /* Krem ton */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    margin: 0;
+    font-size: clamp(14px, 1.5vw, 16px); /* Dinamik font boyutu */
+    line-height: 1.6;
 }
 
-/* Giriş Formu */
-.login-container {
-    background: white;
-    padding: 30px;
-    border-radius: 10px;
-    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2);
-    text-align: center;
-    width: 90%;
-    max-width: 400px;
+/* Resimler için maksimum genişlik */
+img {
+    max-width: 100%;
+    height: auto;
 }
 
-h2 {
-    color: #800000; /* Bordo */
-    margin-bottom: 20px;
+/* Özel renkler için CSS değişkenleri */
+:root {
+    --primary-color: #793657;
+    --secondary-color: #800000;
 }
+
+.login-button {
+    background: var(--primary-color);
+}
+
+.extra-links a {
+    color: var(--primary-color);
+}
+
 
 input {
     width: 100%;
@@ -151,18 +162,3 @@ button {
     color: #793657; /* Bordo */
     transition: 0.3s;
 }
-
-.extra-links a:hover {
-    color: #5c0000; /* Daha koyu bordo */
-}
-
-
-
-  .navbar-dark {
-    background-color: #793657 !important; 
-  }
-
-/* .navbar-brand {
-    display: none; 
-}
-*/
