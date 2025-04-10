@@ -1,6 +1,7 @@
 <?php
 /** @var yii\web\View $this */
 
+
 $this->title = 'PPD';
 ?>
 <div class="site-index">
@@ -8,11 +9,12 @@ $this->title = 'PPD';
     <div class="jumbotron text-center bg-transparent mt-5 mb-5">
         <div class="d-flex align-items-center justify-content-center mb-4">
             <!-- Logo eklendi -->
-            <img src="/images/logo.jpg" alt="Üniversite Logosu" style="height: 120px; margin-right: 40px;">
-            <!-- Başlık boyutu küçültüldü -->
+            <a href="https://www.asbu.edu.tr" class="d-inline-block">
+                <img src="/images/logo.jpg" alt="Üniversite Logosu" style="height: 100px; margin-right: 30px;">
+            </a>
+            <!-- <img src="/images/logo.jpg" alt="Üniversite Logosu" style="height: 120px; margin-right: 40px;"> -->
             <h1 class="display-5" style="font-size: 1.8rem; margin: 0;">İDARİ PERSONEL PERFORMANS ÖLÇÜMÜ</h1>
         </div>
-
 
         <p><a class="btn btn-lg btn-success" href="/index.php?r=site%2Flogin">Giriş Yapmak İçin Tıklayın</a></p>
     </div>
