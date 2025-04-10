@@ -1,5 +1,4 @@
 <?php
-
 /** @var yii\web\View $this */
 
 $this->title = 'PPD';
@@ -7,9 +6,13 @@ $this->title = 'PPD';
 <div class="site-index">
 
     <div class="jumbotron text-center bg-transparent mt-5 mb-5">
-        <h1 class="display-4">İDARİ PERSONEL PERFORMANS ÖLÇÜMÜ</h1>
+        <div class="d-flex align-items-center justify-content-center mb-4">
+            <!-- Logo eklendi -->
+            <img src="/images/logo.jpg" alt="Üniversite Logosu" style="height: 120px; margin-right: 40px;">
+            <!-- Başlık boyutu küçültüldü -->
+            <h1 class="display-5" style="font-size: 1.8rem; margin: 0;">İDARİ PERSONEL PERFORMANS ÖLÇÜMÜ</h1>
+        </div>
 
-        <p class="lead">Ankara Sosyal Bilimler Üniversitesi</p>
 
         <p><a class="btn btn-lg btn-success" href="/index.php?r=site%2Flogin">Giriş Yapmak İçin Tıklayın</a></p>
     </div>
@@ -37,6 +40,14 @@ $this->title = 'PPD';
                 <p>Puanlar toplanıp raporlanır.</p>
 
                 <p><a class="btn btn-outline-secondary" href="https://www.yiiframework.com/extensions/">Eklentiler &raquo;</a></p>
+                
+            </div>
+            <div class="col-lg-4">
+                <h2>Ölçek</h2>
+
+                <p>30 soruluk ölçek</p>
+
+                <p><a class="btn btn-outline-secondary" href="/index.php?r=site/olcek">Giriş &raquo;</a></p>
                 
             </div>
         </div>
