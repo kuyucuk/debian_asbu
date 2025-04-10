@@ -10,7 +10,7 @@ $this->title = 'PPD';
         <div class="d-flex align-items-center justify-content-center mb-4">
             <!-- Logo eklendi -->
             <a href="https://www.asbu.edu.tr" class="d-inline-block">
-                <img src="/images/logo.jpg" alt="Üniversite Logosu" style="height: 100px; margin-right: 30px;">
+                <img src="/images/new-asbu-logo-tr.jpg" alt="Üniversite Logosu" style="height: 100px; margin-right: 30px;">
             </a>
             <!-- <img src="/images/logo.jpg" alt="Üniversite Logosu" style="height: 120px; margin-right: 40px;"> -->
             <h1 class="display-5" style="font-size: 1.8rem; margin: 0;">İDARİ PERSONEL PERFORMANS ÖLÇÜMÜ</h1>
