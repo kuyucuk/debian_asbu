@@ -130,4 +130,10 @@ class SiteController extends Controller
 {
     return $this->render('olcek');
 }
+
+    public function actionYoneticipaneli()
+{
+    return $this->render('yoneticipaneli');
 }
+}
+
