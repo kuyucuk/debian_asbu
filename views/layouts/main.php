@@ -41,11 +41,13 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav'],
         'items' => [
+            /*
             ['label' => 'Anasayfa', 'url' => ['/site/index']],
             ['label' => 'Hakkında', 'url' => ['/site/about']],
             ['label' => 'İletişim', 'url' => ['/site/contact']],
+            */
             Yii::$app->user->isGuest
-                ? ['label' => 'Giriş', 'url' => ['/site/login']]
+                ? ['label' => '', 'url' => ['/site/login']]
                 : '<li class="nav-item">'
                     . Html::beginForm(['/site/logout'])
                     . Html::submitButton(

@@ -135,5 +135,15 @@ class SiteController extends Controller
 {
     return $this->render('yoneticipaneli');
 }
+
+public function actionPersonelpaneli()
+{
+    return $this->render('personelpaneli');
+}
+
+
+
+
+
 }
 
