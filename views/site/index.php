@@ -14,7 +14,6 @@ $this->title = 'PPD';
         </div>
     </div>
     <?php
-    #session_start();
     include 'db.php';
 
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -42,13 +41,19 @@ $this->title = 'PPD';
         <title>Giriş</title>
         <link rel="stylesheet" href="styles.css">
         <style>
+            .login-container {
+                text-align: center;
+                margin: 0 auto;
+                max-width: 400px;
+            }
             .toggle-container {
                 display: flex;
                 align-items: center;
+                justify-content: center;
                 margin-top: 10px;
             }
             .toggle-label {
-                margin-left: 10px; /* Mesafe eklendi */
+                margin-left: 10px;
             }
             .switch {
                 position: relative;
@@ -75,8 +80,6 @@ $this->title = 'PPD';
             .slider:before {
                 position: absolute;
                 content: "";
-                color: white;
-                font-size: 12px;
                 left: 10px;
                 top: 50%;
                 transform: translateY(-50%);
@@ -92,6 +95,20 @@ $this->title = 'PPD';
             }
             input:checked + .slider:before {
                 left: 35px;
+            }
+            .panels-container {
+                display: flex;
+                justify-content: center;
+                margin-top: 20px;
+            }
+            .panel {
+                text-align: center;
+                margin: 0 20px;
+                display: none;
+            }
+            .panel h2 {
+                color: #793657;
+                text-decoration: none;
             }
         </style>
     </head>
@@ -117,41 +134,48 @@ $this->title = 'PPD';
 
             <!-- Kayıt Ol & Şifre Sıfırlama -->
             <div class="extra-links">
-                <p> <a href="forgot_password.php">Şifremi Unuttum</a></p>
+                <p><a href="forgot_password.php">Şifremi Unuttum</a></p>
+            </div>
+        </div>
+
+        <!-- Panels -->
+        <div class="panels-container">
+            <div id="personelPanel" class="panel">
+                <a href="/index.php?r=site/personelpaneli" class="text-decoration-none">
+                    <h2>Personel Paneli</h2>
+                </a>
+                <p>Personel olarak giriş yapıldığında bu sayfa açılacak</p>
+            </div>
+            <div id="yoneticiPanel" class="panel">
+                <a href="/index.php?r=site/yoneticipaneli" class="text-decoration-none">
+                    <h2>Yönetici Paneli</h2>
+                </a>
+                <p>Yönetici olarak giriş yapıldığında bu sayfa açılacak</p>
             </div>
         </div>
 
         <script>
             const roleToggle = document.getElementById('roleToggle');
             const roleLabel = document.getElementById('roleLabel');
+            const personelPanel = document.getElementById('personelPanel');
+            const yoneticiPanel = document.getElementById('yoneticiPanel');
 
-            roleToggle.addEventListener('change', function() {
-                if (this.checked) {
+            function updatePanels() {
+                if (roleToggle.checked) {
                     roleLabel.textContent = 'Yönetici';
+                    personelPanel.style.display = 'none';
+                    yoneticiPanel.style.display = 'block';
                 } else {
                     roleLabel.textContent = 'Personel';
+                    personelPanel.style.display = 'block';
+                    yoneticiPanel.style.display = 'none';
                 }
-            });
+            }
+
+            roleToggle.addEventListener('change', updatePanels);
+
+            // Initialize panels on page load
+            updatePanels();
         </script>
     </body>
     </html>
-
-    <!-- 50px boşluk eklemek için aşağıdaki stil eklendi -->
-    <div style="height: 100px;"></div>
-
-<div class="body-content">
-    <div class="row">
-        <div class="col-lg-4 mb-3" style="margin-right: 435px;">
-            <a href="/index.php?r=site/personelpaneli" class="text-decoration-none">
-                <h2 style="color: #793657; text-decoration: none;" class="link-title">Personel Paneli</h2>
-            </a>
-            <p>Perspnel olarak giriş yapıldığında bu sayfa açılacak</p>
-        </div>
-        <div class="col-lg-4">
-            <a href="/index.php?r=site/yoneticipaneli" class="text-decoration-none">
-                <h2 style="color: #793657; text-decoration: none;" class="link-title">Yönetici Paneli</h2>
-            </a>
-            <p>Yönetici olarak giriş yapıldığında bu sayfa açılacak</p>
-        </div>
-    </div>
-</div>
