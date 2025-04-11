@@ -13,7 +13,6 @@ $this->title = 'PPD';
             </a>
         </div>
     </div>
-
     <?php
     #session_start();
     include 'db.php';
@@ -42,6 +41,59 @@ $this->title = 'PPD';
         <meta charset="UTF-8">
         <title>Giriş</title>
         <link rel="stylesheet" href="styles.css">
+        <style>
+            .toggle-container {
+                display: flex;
+                align-items: center;
+                margin-top: 10px;
+            }
+            .toggle-label {
+                margin-left: 10px; /* Mesafe eklendi */
+            }
+            .switch {
+                position: relative;
+                display: inline-block;
+                width: 60px;
+                height: 34px;
+            }
+            .switch input {
+                opacity: 0;
+                width: 0;
+                height: 0;
+            }
+            .slider {
+                position: absolute;
+                cursor: pointer;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background-color: #ccc;
+                transition: .4s;
+                border-radius: 34px;
+            }
+            .slider:before {
+                position: absolute;
+                content: "";
+                color: white;
+                font-size: 12px;
+                left: 10px;
+                top: 50%;
+                transform: translateY(-50%);
+                transition: .4s;
+                width: 20px;
+                height: 20px;
+                background-color: white;
+                border-radius: 50%;
+                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+            }
+            input:checked + .slider {
+                background-color: #2196F3;
+            }
+            input:checked + .slider:before {
+                left: 35px;
+            }
+        </style>
     </head>
     <body>
         <div class="login-container">
@@ -50,6 +102,16 @@ $this->title = 'PPD';
             <form method="POST">
                 <input type="email" name="email" placeholder="E-posta" required><br>
                 <input type="password" name="password" placeholder="Şifre" required><br>
+                
+                <!-- Toggle Switch -->
+                <div class="toggle-container">
+                    <label class="switch">
+                        <input type="checkbox" id="roleToggle">
+                        <span class="slider round"></span>
+                    </label>
+                    <span class="toggle-label" id="roleLabel">Personel</span>
+                </div>
+
                 <button type="submit" class="login-button">Giriş Yap</button>
             </form>
 
@@ -58,35 +120,38 @@ $this->title = 'PPD';
                 <p> <a href="forgot_password.php">Şifremi Unuttum</a></p>
             </div>
         </div>
+
+        <script>
+            const roleToggle = document.getElementById('roleToggle');
+            const roleLabel = document.getElementById('roleLabel');
+
+            roleToggle.addEventListener('change', function() {
+                if (this.checked) {
+                    roleLabel.textContent = 'Yönetici';
+                } else {
+                    roleLabel.textContent = 'Personel';
+                }
+            });
+        </script>
     </body>
     </html>
 
     <!-- 50px boşluk eklemek için aşağıdaki stil eklendi -->
     <div style="height: 100px;"></div>
 
-    <div class="body-content">
-        <div class="row">
-            <div class="col-lg-4 mb-3">
-                <h2>Son Kullanıcı Aşaması</h2>
-
-                <p>Çalışanlar sistemden bilgilerini çekip sertifikalarını yükleyebilir.</p>
-
-                <p><a class="btn btn-outline-secondary" href="/index.php?r=site/personelpaneli">Giriş &raquo;</a></p>
-            </div>
-            <div class="col-lg-4">
-                <h2>Yönetici Paneli</h2>
-
-                <p>Yönetici olarak giriş yapıldığında bu sayfa açılacak</p>
-
-                <p><a class="btn btn-outline-secondary" href="/index.php?r=site/yoneticipaneli">Giriş &raquo;</a></p>
-            </div>
-            <div class="col-lg-4">
-                <h2>Genel Değerlendirme Aşaması</h2>
-
-                <p>Puanlar toplanıp raporlanır.</p>
-
-                <p><a class="btn btn-outline-secondary" href="https://www.yiiframework.com/extensions/">Eklentiler &raquo;</a></p>
-            </div>
+<div class="body-content">
+    <div class="row">
+        <div class="col-lg-4 mb-3" style="margin-right: 435px;">
+            <a href="/index.php?r=site/personelpaneli" class="text-decoration-none">
+                <h2 style="color: #793657; text-decoration: none;" class="link-title">Personel Paneli</h2>
+            </a>
+            <p>Perspnel olarak giriş yapıldığında bu sayfa açılacak</p>
+        </div>
+        <div class="col-lg-4">
+            <a href="/index.php?r=site/yoneticipaneli" class="text-decoration-none">
+                <h2 style="color: #793657; text-decoration: none;" class="link-title">Yönetici Paneli</h2>
+            </a>
+            <p>Yönetici olarak giriş yapıldığında bu sayfa açılacak</p>
         </div>
     </div>
 </div>
