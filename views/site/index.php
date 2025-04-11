@@ -27,7 +27,7 @@ $this->title = 'PPD';
 
                 <p>Çalışanlar sistemden bilgilerini çekip sertifikalarını yükleyebilir.</p>
 
-                <p><a class="btn btn-outline-secondary" href="/index.php?r=self-assessment">Giriş &raquo;</a></p>
+                <p><a class="btn btn-outline-secondary" href="/index.php?r=site/personelpaneli">Giriş &raquo;</a></p>
             </div>
             <div class="col-lg-4">
                 <h2>Yönetici Paneli</h2>
@@ -37,13 +37,6 @@ $this->title = 'PPD';
                 <p><a class="btn btn-outline-secondary" href="/index.php?r=site/yoneticipaneli">Giriş &raquo;</a></p>
             </div>
             <div class="col-lg-4">
-                <h2>Personel Paneli</h2>
-
-                <p>Personel olarak giriş yapıldığında bu sayfa açılacak</p>
-
-                <p><a class="btn btn-outline-secondary" href="/index.php?r=site/personelpaneli">Giriş &raquo;</a></p>
-            </div>
-            <div class="col-lg-4">
                 <h2>Genel Değerlendirme Aşaması</h2>
 
                 <p>Puanlar toplanıp raporlanır.</p>
@@ -51,15 +44,6 @@ $this->title = 'PPD';
                 <p><a class="btn btn-outline-secondary" href="https://www.yiiframework.com/extensions/">Eklentiler &raquo;</a></p>
                 
             </div>
-            <div class="col-lg-4">
-                <h2>Ölçek</h2>
-
-                <p>30 soruluk ölçek</p>
-
-                <p><a class="btn btn-outline-secondary" href="/index.php?r=site/olcek">Giriş &raquo;</a></p>
-            </div>
-
         </div>
-
     </div>
 </div>
