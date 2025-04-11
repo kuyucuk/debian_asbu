@@ -1,7 +1,6 @@
 <?php
 /** @var yii\web\View $this */
 
-
 $this->title = 'PPD';
 ?>
 <div class="site-index">
@@ -12,15 +11,60 @@ $this->title = 'PPD';
             <a href="https://www.asbu.edu.tr" class="d-inline-block">
                 <img src="/images/new-asbu-logo-tr.jpg" alt="Üniversite Logosu" style="height: 100px; margin-right: 30px;">
             </a>
-            <!-- <img src="/images/logo.jpg" alt="Üniversite Logosu" style="height: 120px; margin-right: 40px;"> -->
-            <h1 class="display-5" style="font-size: 1.8rem; margin: 0;">İDARİ PERSONEL PERFORMANS ÖLÇÜMÜ</h1>
         </div>
-
-        <p><a class="btn btn-lg btn-success" href="/index.php?r=site%2Flogin">Giriş Yapmak İçin Tıklayın</a></p>
     </div>
 
-    <div class="body-content">
+    <?php
+    #session_start();
+    include 'db.php';
 
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        $email = $_POST['email'];
+        $password = $_POST['password'];
+
+        $stmt = $pdo->prepare("SELECT * FROM users WHERE email = ?");
+        $stmt->execute([$email]);
+        $user = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if ($user && password_verify($password, $user['password'])) {
+            $_SESSION['admin'] = $user['id'];
+            header("Location: dashboard.php");
+            exit;
+        } else {
+            $error = "Geçersiz giriş bilgileri!";
+        }
+    }
+    ?>
+
+    <!DOCTYPE html>
+    <html lang="tr">
+    <head>
+        <meta charset="UTF-8">
+        <title>Giriş</title>
+        <link rel="stylesheet" href="styles.css">
+    </head>
+    <body>
+        <div class="login-container">
+            <h2>İDARİ PERSONEL PERFORMANS ÖLÇÜMÜ</h2>
+            <?php if (isset($error)) echo "<p style='color:red;'>$error</p>"; ?>
+            <form method="POST">
+                <input type="email" name="email" placeholder="E-posta" required><br>
+                <input type="password" name="password" placeholder="Şifre" required><br>
+                <button type="submit" class="login-button">Giriş Yap</button>
+            </form>
+
+            <!-- Kayıt Ol & Şifre Sıfırlama -->
+            <div class="extra-links">
+                <p> <a href="forgot_password.php">Şifremi Unuttum</a></p>
+            </div>
+        </div>
+    </body>
+    </html>
+
+    <!-- 50px boşluk eklemek için aşağıdaki stil eklendi -->
+    <div style="height: 100px;"></div>
+
+    <div class="body-content">
         <div class="row">
             <div class="col-lg-4 mb-3">
                 <h2>Son Kullanıcı Aşaması</h2>
@@ -42,7 +86,6 @@ $this->title = 'PPD';
                 <p>Puanlar toplanıp raporlanır.</p>
 
                 <p><a class="btn btn-outline-secondary" href="https://www.yiiframework.com/extensions/">Eklentiler &raquo;</a></p>
-                
             </div>
         </div>
     </div>
