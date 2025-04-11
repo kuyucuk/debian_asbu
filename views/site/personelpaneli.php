@@ -15,7 +15,7 @@
             <li><a href="users.php">Profil Bilgileri</a></li>
             <li><a href="/index.php?r=self-assessment">Son Kullanıcı Değerlendirme Sayfası</a></li>
             <li><a href="/index.php?r=site/olcek">İdari Performans Ölçüm Alanı</a></li>
-            <li><a href="logout.php">Çıkış Yap</a></li>
+            <li><a href="index.php">Çıkış Yap</a></li>
         </ul>
         
     </div>

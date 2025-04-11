@@ -1,4 +1,5 @@
 
+
 <!DOCTYPE html>
 <html lang="tr">
 <head>
@@ -14,7 +15,7 @@
             <li><a href="users.php">Kullanıcı Yönetimi</a></li>
             <li><a href="evaluations.php">Performans Değerlendirmeleri</a></li>
             <li><a href="categories.php">Değerlendirme Kategorileri</a></li>
-            <li><a href="logout.php">Çıkış Yap</a></li>
+            <li><a href="index.php">Çıkış Yap</a></li>
         </ul>
         
     </div>
