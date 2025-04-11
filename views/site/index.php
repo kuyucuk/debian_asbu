@@ -29,12 +29,19 @@ $this->title = 'PPD';
 
                 <p><a class="btn btn-outline-secondary" href="/index.php?r=self-assessment">Giriş &raquo;</a></p>
             </div>
-            <div class="col-lg-4 mb-3">
-                <h2>Üst Yönetici Aşaması</h2>
+            <div class="col-lg-4">
+                <h2>Yönetici Paneli</h2>
 
-                <p>Yöneticiler girilen bilgileri onaylayıp iş becerisi bölümünü değerlendirir.</p>
+                <p>Yönetici olarak giriş yapıldığında bu sayfa açılacak</p>
 
-                <p><a class="btn btn-outline-secondary" href="https://www.yiiframework.com/forum/">Forum &raquo;</a></p>
+                <p><a class="btn btn-outline-secondary" href="/index.php?r=site/yoneticipaneli">Giriş &raquo;</a></p>
+            </div>
+            <div class="col-lg-4">
+                <h2>Personel Paneli</h2>
+
+                <p>Personel olarak giriş yapıldığında bu sayfa açılacak</p>
+
+                <p><a class="btn btn-outline-secondary" href="/index.php?r=site/personelpaneli">Giriş &raquo;</a></p>
             </div>
             <div class="col-lg-4">
                 <h2>Genel Değerlendirme Aşaması</h2>
@@ -50,8 +57,8 @@ $this->title = 'PPD';
                 <p>30 soruluk ölçek</p>
 
                 <p><a class="btn btn-outline-secondary" href="/index.php?r=site/olcek">Giriş &raquo;</a></p>
-                
             </div>
+
         </div>
 
     </div>
