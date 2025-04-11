@@ -134,7 +134,7 @@ $this->title = 'PPD';
 
             <!-- Kayıt Ol & Şifre Sıfırlama -->
             <div class="extra-links">
-                <p><a href="forgot_password.php">Şifremi Unuttum</a></p>
+                <p><a href="/index.php?r=site/sifreunutma">Şifremi Unuttum</a></p>
             </div>
         </div>
 

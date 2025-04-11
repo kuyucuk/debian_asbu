@@ -140,6 +140,10 @@ public function actionPersonelpaneli()
 {
     return $this->render('personelpaneli');
 }
+public function actionSifreunutma()
+{
+    return $this->render('sifreunutma');
+}
 
 
 
