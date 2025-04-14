@@ -145,7 +145,10 @@ public function actionSifreunutma()
     return $this->render('sifreunutma');
 }
 
-
+public function actionProfil()
+{
+    return $this->render('profil');
+}
 
 
 

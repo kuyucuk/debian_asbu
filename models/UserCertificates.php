@@ -50,10 +50,26 @@ class UserCertificates extends \yii\db\ActiveRecord
 {
     if (parent::beforeSave($insert)) {
         if ($this->isNewRecord) {
+            // Dosya yolu tam olarak belirtmek
+            $uploadPath = Yii::getAlias('@webroot/uploads/certificates/'); // Tam yolu belirtilir
+            if (!is_dir($uploadPath)) {
+                mkdir($uploadPath, 0777, true); // Eğer klasör yoksa oluştur
+                Yii::$app->session->setFlash('success', 'Klasör oluşturuldu.');
+            }
             // Benzersiz dosya adı oluşturmak için timestamp veya UUID kullan
             $extension = pathinfo($this->document_file_path, PATHINFO_EXTENSION); // Dosya uzantısını al
             $uniqueName = Yii::$app->security->generateRandomString(10) . '.' . $extension; // Benzersiz isim oluştur
             $this->document_file_path = 'uploads/certificates/' . $uniqueName; // Yeni dosya yolu oluştur
+             // Yüklenen dosyayı hedef dizine taşınması
+             if ($this->document_file_path && $this->save()) {
+                // Dosya kaydetme işlemi
+                $file = $this->document_file_path; // Hedef dosya yolu
+                $uploadedFile = Yii::$app->basePath . '/web/' . $file; // Tam dosya yolu
+                if (!move_uploaded_file($this->document_file_path, $uploadedFile)) {
+                    // Hata durumu
+                    Yii::error("Dosya kaydedilemedi: " . $file);
+                }
+            }
         }
         return true;
     }
