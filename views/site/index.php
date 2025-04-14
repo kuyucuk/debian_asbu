@@ -110,6 +110,30 @@ $this->title = 'PPD';
                 color: #793657;
                 text-decoration: none;
             }
+            .button-container {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                gap: 10px;
+                margin-top: 20px;
+            }
+            .button-container a, .button-container button {
+                display: inline-block;
+                width: 100%;
+                max-width: 200px;
+                padding: 10px;
+                text-align: center;
+                background-color: #793657;
+                color: white;
+                text-decoration: none;
+                border: none;
+                border-radius: 5px;
+                font-size: 16px;
+                cursor: pointer;
+            }
+            .button-container a:hover, .button-container button:hover {
+                opacity: 0.9;
+            }
         </style>
     </head>
     <body>
@@ -129,13 +153,11 @@ $this->title = 'PPD';
                     <span class="toggle-label" id="roleLabel">Personel</span>
                 </div>
 
-                <button type="submit" class="login-button">Giriş Yap</button>
+                <div class="button-container">
+                    <button type="submit" class="login-button">Giriş Yap</button>
+                    <a href="/index.php?r=site/sifreunutma">Şifremi Unuttum</a>
+                </div>
             </form>
-
-            <!-- Kayıt Ol & Şifre Sıfırlama -->
-            <div class="extra-links">
-                <p><a href="/index.php?r=site/sifreunutma">Şifremi Unuttum</a></p>
-            </div>
         </div>
 
         <!-- Panels -->
