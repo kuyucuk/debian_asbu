@@ -4,9 +4,8 @@ namespace app\models;
 
 use Yii;
 use yii\db\ActiveRecord;
-use yii\web\IdentityInterface;
 
-class User extends ActiveRecord implements IdentityInterface
+class User extends ActiveRecord
 {
     public static function tableName()
     {
@@ -16,32 +15,56 @@ class User extends ActiveRecord implements IdentityInterface
     public function rules()
     {
         return [
-            [['ad', 'soyad', 'email', 'password_hash'], 'required'], 
+            [['ad', 'soyad', 'email'], 'required'], 
             ['kullanici_adi', 'unique'],
-            [['ad', 'soyad', 'kullanici_adi', 'unvan', 'telefon'], 'string'],
+            [['ad', 'soyad', 'kullanici_adi'], 'string', 'max' => 255],
             ['email', 'email'], 
             ['email', 'unique'],
         ];
     }
-
-    // Kullanıcıyı kullanıcı adına göre bulur
-    public static function findByUsername($username)
-    {
-        return static::findOne(['kullanici_adi' => $username]);
-    }
-
-    // Şifreyi hashleme metodu (DÜZELTİLDİ)
-    public function setPassword($password)
-    {
-        $this->password_hash = Yii::$app->security->generatePasswordHash($password);
-    }
-
-    // Şifre doğrulama metodu (DÜZELTİLDİ)
-    public function validatePassword($password)
+    /*public function attributeLabels()
 {
-    return $password === $this->password_hash; // Test için düz karşılaştırma
-}
+    return [
+        'id' => 'ID',
+        'ad' => 'Adı',
+        'soyad' => 'Soyadı',
+        'email' => 'E-Posta',
+        'kullanici_adi' => 'Kullanıcı Adı',
+        //'unvan' => 'Ünvan',
+        //'telefon' => 'Telefon',
+        //'password_hash' => 'Şifre',
+    ];
+}*/
 
+
+    // Şifreyi hashleme metodu
+   /* public function setPassword($password)
+    {
+        //email bazlı hashleme yapmak istersek bu kodu kullanıyoruz.
+        if (!empty($this->email)) {
+            $salt = md5($this->email); 
+            $this->password_hash = Yii::$app->security->generatePasswordHash($password . $salt);
+        }
+
+
+        //email ile değil de salt şifreleme kodu
+        /*if (!empty($password)) { 
+            $this->password_hash = Yii::$app->security->generatePasswordHash($password);
+        }*
+    }*/
+
+    // Şifre doğrulama metodu
+   /* public function validatePassword($password)
+    {
+        //salt şifrelemenin doğrulama kodu
+        //return Yii::$app->security->validatePassword($password, $this->password_hash);
+
+        if (!empty($this->email)) {
+            $salt = md5($this->email);
+            return Yii::$app->security->validatePassword($password . $salt, $this->password_hash);
+        }
+        return false;
+    }*/
 
     // Kullanıcı adı oluşturma fonksiyonu
     public function generateUsername($ad, $soyad)
@@ -64,37 +87,14 @@ class User extends ActiveRecord implements IdentityInterface
     // Kayıttan önce kullanıcı adını oluşturma
     public function beforeSave($insert)
     {
-        if ($this->isNewRecord) {
+        if ($this->isNewRecord && empty($this->kullanici_adi) && !empty($this->ad) && !empty($this->soyad)) { //ad ve soyadın boş gelmemesi gerektiğini söylüyor
             $this->kullanici_adi = $this->generateUsername($this->ad, $this->soyad);
         }
 
         return parent::beforeSave($insert);
     }
-
-    // IdentityInterface Metodları
-
-    public static function findIdentity($id)
-    {
-        return static::findOne($id);
-    }
-
-    public static function findIdentityByAccessToken($token, $type = null)
-    {
-        return null; // Access Token kullanmıyorsanız null dönebilirsiniz.
-    }
-
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    public function getAuthKey()
-    {
-        return null; // Eğer authKey kullanmıyorsanız null dönebilirsiniz.
-    }
-
-    public function validateAuthKey($authKey)
-    {
-        return false; // Eğer authKey kullanmıyorsanız false dönebilirsiniz.
-    }
+    public function getUserDepartments()
+{
+    return $this->hasMany(UserDepartment::class, ['user_id' => 'id']);
+}
 }

@@ -20,9 +20,12 @@ $this->title = 'PPD';
             <div class="col-lg-4 mb-3">
                 <h2>Son Kullanıcı Aşaması</h2>
 
-                <p>Çalışanlar sistemden bilgilerini çekip sertifikalarını yükleyebilir.</p>
+                <p>İdari personelin kendini değerlendirebileceği alan!</p>
+                <!-- Yönlendirme Linki -->
+                <a href="<?= \yii\helpers\Url::to(['self-assessment/index']) ?>" class="btn btn-primary">Giriş</a>
+        
 
-                <p><a class="btn btn-outline-secondary" href="https://www.yiiframework.com/doc/">Döküman &raquo;</a></p>
+                <!--<p><a class="btn btn-outline-secondary" href="https://www.yiiframework.com/doc/">Döküman &raquo;</a></p> -->
             </div>
             <div class="col-lg-4 mb-3">
                 <h2>Üst Yönetici Aşaması</h2>

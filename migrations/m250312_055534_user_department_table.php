@@ -9,7 +9,12 @@ class m250312_055534_user_department_table extends Migration
      */
     public function safeUp()
     {
+        
+
+ 
+
         $this->createTable('{{%user_department}}', [
+        //$this->createTable('user_department', [
             'id' => $this->primaryKey(),
             'user_id' => $this->integer()->notNull(),
             'department_id' => $this->integer()->notNull(),
@@ -23,7 +28,7 @@ class m250312_055534_user_department_table extends Migration
             'fk-user_department-user_id',
             'user_department',
             'user_id',
-            'user',
+            'users',
             'id',
             'CASCADE'
         );
@@ -58,12 +63,10 @@ class m250312_055534_user_department_table extends Migration
         $this->dropForeignKey('fk-user_department-user_id', 'user_department');
         $this->dropForeignKey('fk-user_department-department_id', 'user_department');
         $this->dropForeignKey('fk-user_department-role_id', 'user_department');
-
- 
         $this->dropTable('user_department');
     }
-
-    /*
+        
+/*
     // Use up()/down() to run migration code without a transaction.
     public function up()
     {
@@ -78,3 +81,5 @@ class m250312_055534_user_department_table extends Migration
     }
     */
 }
+
+    
