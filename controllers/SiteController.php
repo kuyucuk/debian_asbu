@@ -125,4 +125,32 @@ class SiteController extends Controller
     {
         return $this->render('about');
     }
+
+    public function actionOlcek()
+{
+    return $this->render('olcek');
 }
+
+    public function actionYoneticipaneli()
+{
+    return $this->render('yoneticipaneli');
+}
+
+public function actionPersonelpaneli()
+{
+    return $this->render('personelpaneli');
+}
+public function actionSifreunutma()
+{
+    return $this->render('sifreunutma');
+}
+
+public function actionProfil()
+{
+    return $this->render('profil');
+}
+
+
+
+}
+

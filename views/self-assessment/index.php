@@ -1,3 +1,4 @@
+
 <?php
 
 use yii\helpers\Html;
@@ -121,4 +122,3 @@ $script = <<< JS
 JS;
 
 $this->registerJs($script);
-?>

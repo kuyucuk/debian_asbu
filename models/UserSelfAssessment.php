@@ -49,4 +49,3 @@ public function attributeLabels()
         return $this->hasOne(User::class, ['id' => 'user_id']);
     }
 }
-
