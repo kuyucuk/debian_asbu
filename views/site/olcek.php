@@ -44,7 +44,6 @@ $this->title = 'Performans Ölçüm Formu';
                 'Sorun ve anlaşmazlıklara ilişkin neden ve sonuçları değerlendirir, alternatifleri belirler.',
                 'Sorun ve anlaşmazlıkları hızlı, doğru ve kalıcı bir biçimde çözer.',
                 'İşini standartlara ve mevzuata uygun olarak yapabilme becerisi yüksektir.',
-                'Görüş ve düşüncelerini, yazılı ve sözlü, sözsüz iletişim becerilerini kullanarak açık ve net bir şekilde ifade eder.',
                 'Görevlerin ifası için sorun, kişi, araç, zaman ve diğer kaynakları belirler ve organize eder.',
                 'Pozitif düşünür, kendini ve çalışanlarını motive edici olumlu liderlik etkileri ortaya koyar.',
                 'Faaliyetleri denetleyerek ve düzeltici önlemleri alarak kontrol işlevini yerine getirir.',
