@@ -149,6 +149,12 @@ public function actionProfil()
 {
     return $this->render('profil');
 }
+public function actionKullaniciyonetimi()
+{
+    return $this->render('kullaniciyonetimi');
+}
+
+
 
 
 

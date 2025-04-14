@@ -12,7 +12,8 @@
     <div class="panel-container">
         <h1>Yönetici Paneli</h1>
         <ul>
-            <li><a href="users.php">Kullanıcı Yönetimi</a></li>
+            <li><a href="/index.php?r=site/kullaniciyonetimi">Kullanıcı Yönetimi</a></li>
+            <li><a href="/index.php?r=site/olcek">İdari Performans Ölçüm Alanı</a></li>
             <li><a href="evaluations.php">Performans Değerlendirmeleri</a></li>
             <li><a href="categories.php">Genel Değerlendirme ve Raporlama</a></li>
             <li><a href="index.php">Çıkış Yap</a></li>
@@ -24,20 +25,7 @@
 
 <?php
 $css = <<<CSS
-.panel-container {
-    max-width: 800px;
-    margin: 50px auto;
-    background: white;
-    padding: 30px;
-    border-radius: 8px;
-    box-shadow: 0 0 15px rgba(0,0,0,0.1);
-}
 
-h1 {
-    color: #333;
-    text-align: center;
-    margin-bottom: 30px;
-}
 
 ul {
     list-style-type: none;
