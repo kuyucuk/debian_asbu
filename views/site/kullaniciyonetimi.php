@@ -44,6 +44,9 @@
         .user-table tr:hover {
             background-color: #f5f5f5;
         }
+        .user-table tbody tr {
+            cursor: pointer;
+        }
         .back-link {
             margin-top: 20px;
             text-align: center;
@@ -148,7 +151,7 @@
                     if ($title === 'Genel Sekreter') {
                         if ($uniqueRoles['Genel Sekreter']) continue;
                         $uniqueRoles['Genel Sekreter'] = true;
-                        $department = 'Rektörlük'; // Genel Sekreter'in birimi her zaman Rektörlük
+                        $department = 'Rektörlük';
                     } elseif ($title === 'Dekan') {
                         if (in_array($department, $uniqueRoles['Dekan'])) continue;
                         $uniqueRoles['Dekan'][] = $department;
@@ -156,8 +159,6 @@
                         if (in_array($department, $uniqueRoles['Daire Başkanı'])) continue;
                         $uniqueRoles['Daire Başkanı'][] = $department;
                     }
-
-
 
                     $personnel[] = [
                         'sicilNo' => $sicilNo,
@@ -182,7 +183,6 @@
                 $counter++;
             }
             ?>
-
             </tbody>
         </table>
 
@@ -194,6 +194,7 @@
         </div>
     </div>
 
+    <!-- JavaScript: Sayfalama -->
     <script>
         const rows = Array.from(document.querySelectorAll(".user-table tbody tr"));
         const pagination = document.getElementById("pagination");
@@ -261,6 +262,7 @@
         showPage(1);
     </script>
 
+    <!-- JavaScript: Filtreleme -->
     <script>
         const sicilFilter = document.getElementById("sicilno-filter");
         const nameFilter = document.getElementById("name-filter");
@@ -269,14 +271,7 @@
         const departmentFilter = document.getElementById("department-filter");
 
         const allRows = Array.from(document.querySelectorAll(".user-table tbody tr"));
-
-        const filters = {
-            sicilno: sicilFilter,
-            name: nameFilter,
-            surname: surnameFilter,
-            title: titleFilter,
-            department: departmentFilter
-        };
+        const filters = { sicilno: sicilFilter, name: nameFilter, surname: surnameFilter, title: titleFilter, department: departmentFilter };
 
         function getSelectedFilters() {
             return {
@@ -290,27 +285,17 @@
 
         function updateFilterOptions() {
             const selected = getSelectedFilters();
-
-            // Geçerli filtrelerle eşleşen satırları bul
-            const matchingRows = allRows.filter(row => {
-                return Object.entries(selected).every(([key, value]) => {
-                    return value === "all" || row.dataset[key] === value;
-                });
-            });
+            const matchingRows = allRows.filter(row => Object.entries(selected).every(([key, val]) => val === "all" || row.dataset[key] === val));
 
             Object.entries(filters).forEach(([key, select]) => {
                 const prevValue = select.value;
                 select.innerHTML = `<option value="all">${select.options[0].textContent}</option>`;
-
-                const values = [...new Set(matchingRows.map(row => row.dataset[key]))].sort();
-                values.forEach(val => {
+                [...new Set(matchingRows.map(row => row.dataset[key]))].sort().forEach(val => {
                     const option = document.createElement("option");
                     option.value = val;
                     option.textContent = val;
                     select.appendChild(option);
                 });
-
-                // Önceki seçim tekrar varsa koru
                 if ([...select.options].some(opt => opt.value === prevValue)) {
                     select.value = prevValue;
                 }
@@ -319,18 +304,13 @@
 
         function filterTable() {
             const selected = getSelectedFilters();
-
             rows.length = 0;
             allRows.forEach(row => {
-                const matches = Object.entries(selected).every(([key, value]) => {
-                    return value === "all" || row.dataset[key] === value;
-                });
-
-                row.style.display = matches ? "" : "none";
-                if (matches) rows.push(row);
+                const match = Object.entries(selected).every(([key, val]) => val === "all" || row.dataset[key] === val);
+                row.style.display = match ? "" : "none";
+                if (match) rows.push(row);
             });
-
-            updateFilterOptions(); // diğer filtreleri güncelle
+            updateFilterOptions();
             currentPageGroup = 1;
             createPagination();
             showPage(1);
@@ -344,5 +324,25 @@
         filterTable();
     </script>
 
+    <!-- JavaScript: Satır tıklayınca yönlendirme -->
+    <script>
+        document.getElementById('user-table-body').addEventListener('click', function(e) {
+            const row = e.target.closest('tr');
+            if (row) {
+                const idNo = row.dataset.idno;
+                window.location.href = `kullanici.php?sicil=${encodeURIComponent(sicilNo)}`;
+            }
+        });
+        document.getElementById('user-table-body').addEventListener('click', function(e) {
+            const row = e.target.closest('tr');
+            if (row) {
+        const sicilNo = row.dataset.sicilno;
+        window.location.href = `/index.php?r=site/profil&sicilno=${encodeURIComponent(sicilNo)}`;
+    }
+});
+    </script>
+    
 </body>
 </html>
+
+

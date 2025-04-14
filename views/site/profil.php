@@ -1,4 +1,9 @@
 <?php
+$sicilNo = $_GET['sicilno'] ?? null;
+?>
+
+
+<?php
 // Örnek kullanıcı bilgileri ve değerlendirme puanları
 $user = [
     'profile_photo' => 'https://bidb.asbu.edu.tr/sites/idari_birimler/bidb.asbu.edu.tr/files/styles/medium/public/inline-images/tolga.png?itok=92GE3EVR', // Profil fotoğrafı dosya yolu güncellendi
@@ -118,7 +123,7 @@ $user = [
             <strong>Kurum içi panel/etkinlik katılımı:</strong> <?= $user['kurum_ici_panel']; ?> etkinlik
         </div>
         <div style="text-align: center; margin-top: 20px;">
-            <a href="/index.php?r=site/personelpaneli" class="index-link" style="text-decoration: none; color: #3366cc; font-weight: bold;">Geri</a>
+            <a href="javascript:history.back()" class="index-link" style="text-decoration: none; color: #3366cc; font-weight: bold;">Geri</a>
         </div>
     </div>
 </body>
