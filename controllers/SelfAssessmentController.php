@@ -39,6 +39,7 @@ class SelfAssessmentController extends Controller
             $model->external_training_count = UploadedFile::getInstance($model, 'external_training_count');
             $model->committee_participation_count = UploadedFile::getInstance($model, 'committee_participation_count');
             $model->internal_meeting_count = UploadedFile::getInstance($model, 'internal_meeting_count');
+            $model->education_file = UploadedFile::getInstance($model, 'education_file'); //eğitim verdiyse belge eklenmesi
             
             if ($model->validate()) {
                 // Veriyi user_self_assessment tablosuna kaydet
@@ -55,10 +56,12 @@ class SelfAssessmentController extends Controller
                 } else {
                     Yii::$app->session->setFlash('error', 'Değerlendirme kaydedilirken bir hata oluştu.');
                 }
-
+                
                 // Sertifika dosyalarını kaydet
                 $uploadPath = Yii::getAlias('@webroot/uploads/');
                 if (!is_dir($uploadPath)) {
+                    Yii::$app->session->setFlash('error', 'Yükleme dizinine yazma izni yok.');
+                    return $this->refresh();
                     mkdir($uploadPath, 0777, true); // uploads klasörü yoksa oluştur
                 }
 
@@ -68,29 +71,57 @@ class SelfAssessmentController extends Controller
                     'internal_training_count' => $model->internal_training_count,
                     'external_training_count' => $model->external_training_count,
                     'committee_participation_count' => $model->committee_participation_count,
-                    'internal_meeting_count' => $model->internal_meeting_count
+                    'internal_meeting_count' => $model->internal_meeting_count,
+                    'education_file' => $model->education_file
                 ];
-
+//kategoriler burada tanımlandı değiştirilebilir. 
+                $documentCategories = [
+                    'internal_training_count' => 'İç Eğitim Belgesi',
+                    'external_training_count' => 'Dış Eğitim Belgesi',
+                    'committee_participation_count' => 'Komisyon Katılım Belgesi',
+                    'internal_meeting_count' => 'İç Toplantı Katılım Belgesi',
+                    'education_file' => 'Görevlendirme'
+                ];
+                // Kontrol etmek için
+var_dump($uploadedFiles);
+exit;
 
                 foreach ($uploadedFiles as $fileAttribute => $file) {
                     if ($file) {
-                        $filePath = $uploadPath . $file->baseName . '.' . $file->extension;
+                        $uniqueName = Yii::$app->security->generateRandomString(10) . '.' . $file->extension;
+                        $uploadSubPath = 'uploads/certificates/' . $uniqueName;
+                        $fullPath = Yii::getAlias('@webroot/' . $uploadSubPath);
+                        //$filePath = $uploadPath . $file->baseName . '.' . $file->extension;
                         if ($file->saveAs($filePath)) {
                             // UserCertificates tablosuna kaydedelim
                             $certificate = new UserCertificates();
                             $certificate->user_id = $userId;
-                            $certificate->document_file_path  = '/uploads/' . $file->baseName . '.' . $file->extension;
+                            $certificate->document_name  = $file->name;
+                            $certificate->document_file_path  = $uploadSubPath;
+                            //yukarıdaki $uploadSubPath; yaılanın yerine önceden yazdığım kod :'/uploads/' . $file->baseName . '.' . $file->extension; //yüklenen dosyanın yolu
                             //yukarıdaki satırda hata olursa aşağıdakini dene
                             //$certificate->document_file_path = $filePath; // Doğru dosya yolu
-                            $certificate->document_name  = $file->name;
-                            $certificate->document_type = $file->extension;
-                            $certificate->document_category = 'Eğitim Belgesi';
+                            $certificate->document_type = strtoupper($file->extension); //dosya uzantısı
+                            $certificate->document_category = $documentCategories[$fileAttribute] ?? 'Bilinmeyen'; //dosya kategorisi
                             $certificate->uploaded_at = date('Y-m-d H:i:s'); // Yüklenme zamanı
                             $certificate->save();
+                            if ($certificate->save()) {
+                                // Sertifika başarıyla kaydedildi
+                                Yii::$app->session->setFlash('success', 'Sertifika başarıyla kaydedildi.');
+                            } else {
+                                Yii::$app->session->setFlash('error', 'Sertifika kaydedilirken bir hata oluştu. Hata: ' . implode(", ", $certificate->errors));
+                            }
+                        }
+                        else {
+                            Yii::$app->session->setFlash('error', 'Dosya yüklenemedi. Lütfen tekrar deneyin.');
                         }
                     }
                 }
                 Yii::$app->session->setFlash('success', 'Değerlendirmeniz ve dosyalarınız başarıyla kaydedildi.');
+                return $this->refresh(); // Sayfayı yenileyin
+            }
+            else {
+                Yii::$app->session->setFlash('error', 'Doğrulama hatası: ' . implode(", ", $model->errors));
                 return $this->refresh(); // Sayfayı yenileyin
             }
 
@@ -102,5 +133,6 @@ class SelfAssessmentController extends Controller
         ]);
         
     }
+
 }
 

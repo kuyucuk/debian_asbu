@@ -76,6 +76,11 @@ use yii\web\UploadedFile;
             0 => 'Hayır',
         ]) ?>
     </div>
+   
+<!-- Eğitim verdiyse belgenin yükleneceği alan (başta gizli olacak) -->
+<div id="education-file-upload" style="display:none;">
+    <?= $form->field($model, 'education_file')->fileInput() ?>
+</div>
 
     <!-- Soru 8: Evet / Hayır -->
     <!-- Kurum kültürünü ve işleyişi geliştirici düzeltici iyileştirici faaliyetlerde bulunmuştur. -->
@@ -100,3 +105,20 @@ use yii\web\UploadedFile;
 
     <?php ActiveForm::end(); ?>
 </div>
+<?php
+$script = <<< JS
+    // Sayfa yüklendiğinde belge alanını gizle
+    $('#education-file-upload').hide();
+
+    // Radio buton değiştiğinde kontrol et
+    $('input[name="SelfAssessmentForm[education_given]"]').on('change', function() {
+        if ($(this).val() == '1') {
+            $('#education-file-upload').slideDown();  // Evet seçildi
+        } else {
+            $('#education-file-upload').slideUp();    // Hayır seçildi
+        }
+    });
+JS;
+
+$this->registerJs($script);
+?>
