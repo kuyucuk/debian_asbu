@@ -190,7 +190,7 @@
         <div class="pagination" id="pagination"></div>
 
         <div class="back-link">
-            <a href="/index.php?r=site/yoneticipaneli">← Yönetici Paneline Dön</a>
+            <a href="javascript:history.back()" class="back-button">Geri</a>
         </div>
     </div>
 
