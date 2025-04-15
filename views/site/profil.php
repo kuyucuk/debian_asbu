@@ -70,6 +70,25 @@ $user = [
             background-color: #eef;
             border-left: 5px solid #3366cc;
             border-radius: 5px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .puan-box.green {
+            background-color: #d4edda;
+            border-left-color: #28a745;
+        }
+        .puan-box label {
+            margin-right: auto;
+            font-weight: bold;
+        }
+        .radio-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .radio-button {
+            margin-left: auto;
         }
         .button-container {
             display: flex;
@@ -87,31 +106,47 @@ $user = [
             margin-bottom: 10px;
         }
         .back-button {
-            background-color: #3366cc;
-        }
-        .certificates-button {
-            background-color: #28a745;
-        }
-        .measurement-button {
             background-color: #dc3545;
         }
+        .measurement-button {
+            background-color: #3366cc;
+        }
         .complete-button {
-            background-color: #ffc107;
+            background-color: #28a745;
+            transition: background-color 0.3s ease;
+        }
+        .complete-button:active {
+            background-color: #218838;
         }
         .success-message {
             text-align: center;
             margin-top: 20px;
             padding: 10px;
             background-color: #d4edda;
-            color: #155724;
-            border: 1px solid #c3e6cb;
+            color: rgb(88, 190, 112);
             border-radius: 5px;
         }
     </style>
     <script>
+        function toggleApproval(radio, boxId) {
+            const box = document.getElementById(boxId);
+            if (radio.checked && box.classList.contains('green')) {
+                radio.checked = false; // Onayı kaldır
+                box.classList.remove('green');
+            } else if (radio.checked) {
+                box.classList.add('green');
+            }
+        }
+
         function completeEvaluation() {
-            const messageContainer = document.getElementById('success-message');
-            messageContainer.style.display = 'block';
+            const successMessage = document.getElementById('success-message');
+            successMessage.style.display = 'none'; // Önce mesajı gizle
+            successMessage.textContent = ''; // Mesajı temizle
+
+            setTimeout(() => {
+                successMessage.textContent = 'Personel değerlendirmesi başarı ile kaydedilmiştir!';
+                successMessage.style.display = 'block'; // Mesajı yeniden göster
+            }, 100); // Kısa bir gecikme ile yeniden yaz
         }
     </script>
 </head>
@@ -131,25 +166,31 @@ $user = [
         <div class="profile-item"><label>Birim:</label> <?= htmlspecialchars($user['unit']); ?></div>
 
         <div class="section-title">Değerlendirme Bilgileri</div>
-        <div class="puan-box"><strong>ASBÜ’deki Hizmet Yılı:</strong> <?= $user['hizmet_yili']; ?></div>
-        <div class="puan-box"><strong>Eğitim Düzeyi:</strong> <?= $user['egitim_duzeyi']; ?></div>
-        <div class="puan-box"><strong>Yabancı Dil Puanı:</strong> <?= $user['yabanci_dil']; ?></div>
-        <div class="puan-box"><strong>Kurum içi eğitim verme:</strong> <?= $user['egitim_veren']; ?> görev</div>
-        <div class="puan-box"><strong>Kurum dışı eğitimlere katılım:</strong> <?= $user['egitim_katilan']; ?> sertifika</div>
-        <div class="puan-box"><strong>Komisyon/kurul görevleri:</strong> <?= $user['komisyon_gorevi']; ?> görev</div>
-        <div class="puan-box"><strong>Düzeltici iyileştirici faaliyetler:</strong> <?= $user['duzeltici_faaliyet']; ?> adet</div>
-        <div class="puan-box"><strong>Kurum içi panel/etkinlik katılımı:</strong> <?= $user['kurum_ici_panel']; ?> etkinlik</div>
+        <?php
+        $fields = [
+            'egitim_veren' => 'Kurum içi eğitim verme',
+            'egitim_katilan' => 'Kurum dışı eğitimlere katılım',
+            'komisyon_gorevi' => 'Komisyon/kurul görevleri',
+            'duzeltici_faaliyet' => 'Düzeltici iyileştirici faaliyetler',
+            'kurum_ici_panel' => 'Kurum içi panel/etkinlik katılımı'
+        ];
+        foreach ($fields as $key => $label): ?>
+            <div id="<?= $key ?>" class="puan-box">
+                <a href="/index.php?r=self-assessment"><strong><?= $label ?>:</strong> <?= $user[$key]; ?></a>
+                <div class="radio-container">
+                    <label>Onay</label>
+                    <input type="radio" class="radio-button" onclick="toggleApproval(this, '<?= $key ?>')">
+                </div>
+            </div>
+        <?php endforeach; ?>
 
         <div class="button-container">
             <a href="javascript:history.back()" class="back-button">Geri</a>
-            <a href="/index.php?r=self-assessment" class="certificates-button">Yüklenen Belgeler</a>
             <a href="/index.php?r=site/olcek" class="measurement-button">Personel Değerlendirme Ölçeği</a>
             <a href="javascript:void(0);" onclick="completeEvaluation()" class="complete-button">Değerlendirmeyi Tamamla</a>
         </div>
 
-        <div id="success-message" class="success-message" style="display: none;">
-            Personel değerlendirmesi başarı ile kaydedilmiştir!
-        </div>
+        <div id="success-message" class="success-message" style="display: none;"></div>
     </div>
 </body>
 </html>

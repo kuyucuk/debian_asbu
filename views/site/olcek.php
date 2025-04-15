@@ -100,8 +100,8 @@ th:first-child, td:first-child, td:nth-child(2) {
     text-align: right;
 }
 .soru-row.answered {
-    background-color: #28a745; /* Yeşil renk */
-    color: white;
+    background-color: #d4edda; /* Yeşil renk */
+    color: black;
 }
 </style>
 
