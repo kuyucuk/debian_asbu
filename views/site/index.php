@@ -163,13 +163,13 @@ $this->title = 'PPD';
         <!-- Panels -->
         <div class="panels-container">
             <div id="personelPanel" class="panel">
-                <a href="/index.php?r=self-assessment" class="text-decoration-none">
+                <a href="/index.php?r=site/personelpaneli" class="text-decoration-none">
                     <h2>Personel Paneli</h2>
                 </a>
                 <p>Personel olarak giriş yapıldığında bu sayfa açılacak</p>
             </div>
             <div id="yoneticiPanel" class="panel">
-                <a href="/index.php?r=site/kullaniciyonetimi" class="text-decoration-none">
+                <a href="/index.php?r=site/yoneticipaneli" class="text-decoration-none">
                     <h2>Yönetici Paneli</h2>
                 </a>
                 <p>Yönetici olarak giriş yapıldığında bu sayfa açılacak</p>

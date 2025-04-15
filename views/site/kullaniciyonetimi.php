@@ -83,6 +83,7 @@
     </style>
 </head>
 <body>
+    
     <div class="panel-container">
         <h1>Alt Birimlerde Çalışan Personel Listesi</h1>
 
@@ -122,7 +123,7 @@
             <?php
             $personnelCount = 5000;
 
-            $names = ['Ahmet', 'Mehmet', 'Ayşe', 'Fatma', 'Ali', 'Veli', 'Zeynep', 'Emre', 'Can', 'Elif', 'Tolga', 'Merve', 'Burcu', 'Cem', 'Deniz', 'Ece', 'Gizem', 'Hüseyin', 'İlayda', 'Kaan', 'Lara', 'Mert', 'Nisa', 'Oğuz', 'Pelin', 'Seda', 'Tuna', 'Uğur', 'Vildan', 'Yasin'];
+            $names = ['Ahmet', 'Mehmet', 'Ayşe', 'Fatma', 'Ali', 'Veli', 'Zeynep', 'Emre', 'Can', 'Elif', 'Tolga', 'Merve', 'Burcu', 'Cem', 'Deniz', 'Ece', 'Gizem', 'Hüseyin', 'İlayda', 'Kaan', 'Lara', 'Mert', 'Nisa', 'Oğuz', 'Pelin', 'Seda', 'Tuna', 'Uğur', 'Vildan', 'Yasin', 'Zehra', 'Aylin', 'Berk', 'Cansu', 'Derya', 'Efe', 'Furkan', 'Gökhan', 'Hakan', 'Işıl', 'Jale', 'Kerem', 'Leman', 'Melek', 'Nehir', 'Oğuzhan', 'Pınar', 'Rabia', 'Sinem', 'Tamer', 'Ulaş', 'Veysel', 'Yasemin', 'Ziya', 'Aysel', 'Berkay', 'Cemre', 'Dilan', 'Eylül', 'Fikret', 'Gizem', 'Hülya', 'İbrahim', 'Kübra', 'Lütfiye', 'Melek', 'Nihal', 'Oğuzhan', 'Pınar', 'Rabia', 'Seda', 'Tamer', 'Uğur', 'Veysel', 'Yasemin', 'Ziya', 'Aysel', 'Berkay', 'Cemre', 'Dilan', 'Eylül', 'Fikret', 'Gizem', 'Hülya', 'İbrahim', 'Kübra', 'Lütfiye', 'Melek', 'Nihal'];
             $surnames = ['Yılmaz', 'Kaya', 'Demir', 'Çelik', 'Arslan', 'Koç', 'Şahin', 'Yıldız', 'Aksoy', 'Öztürk', 'Aydın', 'Polat', 'Kurt', 'Tekin', 'Çetin', 'Kara', 'Aslan', 'Güneş', 'Özdemir', 'Yavuz', 'Sönmez', 'Acar', 'Duman', 'Erdem', 'Kaya', 'Uçar', 'Yücel', 'Korkmaz', 'Turan'];
             $titles = ['Merkez Müdürü','Enstitü Müdürü', 'Enstitü Sekreteri', 'Daire Başkanı', 'Koordinatör','Fakülte Sekreteri','Genel Sekreter','Dekan','Yüksekokul Müdürü','Yüksekokul Sekreteri'];
             $departments = ['Personel Daire Başkanlığı', 'Mali İşler Daire Başkanlığı', 'Bilgi İşlem Daire Başkanlığı', 'Rektörlük', 'Hukuk Fakültesi', 'İktisadi ve İdari Bilimler Fakültesi', 'Erasmus Koordinatörlüğü', 'Sosyal Bilimler Enstitüsü'];
