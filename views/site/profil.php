@@ -1,27 +1,24 @@
 <?php
 $sicilNo = $_GET['sicilno'] ?? null;
-?>
 
-
-<?php
 // Örnek kullanıcı bilgileri ve değerlendirme puanları
 $user = [
-    'profile_photo' => 'https://bidb.asbu.edu.tr/sites/idari_birimler/bidb.asbu.edu.tr/files/styles/medium/public/inline-images/tolga.png?itok=92GE3EVR', // Profil fotoğrafı dosya yolu güncellendi
+    'profile_photo' => 'https://bidb.asbu.edu.tr/sites/idari_birimler/bidb.asbu.edu.tr/files/styles/medium/public/inline-images/tolga.png?itok=92GE3EVR',
     'name' => 'Tolga Kuyucuk',
     'email' => 'tolga.kuyucuk@asbu.edu.tr',
     'phone' => '543-906-2143',
     'birth_date' => '08.02.1994',
-    'title' => 'Öğretim Görevlisi', // Akademik Ünvan
-    'institution_id' => 'A-519', // Kurum Sicil No
-    'hizmet_yili' => '1 yıl', 
-    'egitim_duzeyi' => 'Yüksek Lisans', 
-    'yabanci_dil' => 'KPDS 72', 
-    'egitim_veren' => 3, 
-    'egitim_katilan' => 4, 
-    'komisyon_gorevi' => 2, 
+    'title' => 'Öğretim Görevlisi',
+    'institution_id' => 'A-519',
+    'hizmet_yili' => '1 yıl',
+    'egitim_duzeyi' => 'Yüksek Lisans',
+    'yabanci_dil' => 'KPDS 72',
+    'egitim_veren' => 3,
+    'egitim_katilan' => 4,
+    'komisyon_gorevi' => 2,
     'duzeltici_faaliyet' => 1,
     'kurum_ici_panel' => 2,
-    'unit' => 'Bilgi İşlem Daire Başkanlığı' // Yeni eklenen birim bilgisi
+    'unit' => 'Bilgi İşlem Daire Başkanlığı'
 ];
 ?>
 
@@ -43,10 +40,6 @@ $user = [
             border: 1px solid #ccc;
             background-color: white;
             border-radius: 10px;
-        }
-        .profile-container h1 {
-            text-align: center;
-            margin-bottom: 30px;
         }
         .profile-header {
             text-align: center;
@@ -78,12 +71,52 @@ $user = [
             border-left: 5px solid #3366cc;
             border-radius: 5px;
         }
+        .button-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+        .button-container a {
+            text-decoration: none;
+            color: #fff;
+            font-weight: bold;
+            padding: 10px 20px;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+        .back-button {
+            background-color: #3366cc;
+        }
+        .certificates-button {
+            background-color: #28a745;
+        }
+        .measurement-button {
+            background-color: #dc3545;
+        }
+        .complete-button {
+            background-color: #ffc107;
+        }
+        .success-message {
+            text-align: center;
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+            border-radius: 5px;
+        }
     </style>
+    <script>
+        function completeEvaluation() {
+            const messageContainer = document.getElementById('success-message');
+            messageContainer.style.display = 'block';
+        }
+    </script>
 </head>
 <body>
     <div class="profile-container">
-        <!-- <h1>Kullanıcı Profili</h1> -->
-
         <div class="profile-header">
             <img src="<?= htmlspecialchars($user['profile_photo']); ?>" alt="Profil Fotoğrafı" class="profile-photo">
             <div><strong><?= htmlspecialchars($user['name']); ?></strong></div>
@@ -95,35 +128,27 @@ $user = [
         <div class="profile-item"><label>E-posta:</label> <?= htmlspecialchars($user['email']); ?></div>
         <div class="profile-item"><label>Telefon:</label> <?= htmlspecialchars($user['phone']); ?></div>
         <div class="profile-item"><label>Doğum Tarihi:</label> <?= htmlspecialchars($user['birth_date']); ?></div>
-        <div class="profile-item"><label>Birim:</label> <?= htmlspecialchars($user['unit']); ?></div> <!-- Yeni eklenen birim -->
+        <div class="profile-item"><label>Birim:</label> <?= htmlspecialchars($user['unit']); ?></div>
 
         <div class="section-title">Değerlendirme Bilgileri</div>
-        <div class="puan-box">
-            <strong>ASBÜ’deki Hizmet Yılı:</strong> <?= $user['hizmet_yili']; ?>
+        <div class="puan-box"><strong>ASBÜ’deki Hizmet Yılı:</strong> <?= $user['hizmet_yili']; ?></div>
+        <div class="puan-box"><strong>Eğitim Düzeyi:</strong> <?= $user['egitim_duzeyi']; ?></div>
+        <div class="puan-box"><strong>Yabancı Dil Puanı:</strong> <?= $user['yabanci_dil']; ?></div>
+        <div class="puan-box"><strong>Kurum içi eğitim verme:</strong> <?= $user['egitim_veren']; ?> görev</div>
+        <div class="puan-box"><strong>Kurum dışı eğitimlere katılım:</strong> <?= $user['egitim_katilan']; ?> sertifika</div>
+        <div class="puan-box"><strong>Komisyon/kurul görevleri:</strong> <?= $user['komisyon_gorevi']; ?> görev</div>
+        <div class="puan-box"><strong>Düzeltici iyileştirici faaliyetler:</strong> <?= $user['duzeltici_faaliyet']; ?> adet</div>
+        <div class="puan-box"><strong>Kurum içi panel/etkinlik katılımı:</strong> <?= $user['kurum_ici_panel']; ?> etkinlik</div>
+
+        <div class="button-container">
+            <a href="javascript:history.back()" class="back-button">Geri</a>
+            <a href="/index.php?r=self-assessment" class="certificates-button">Yüklenen Belgeler</a>
+            <a href="/index.php?r=site/olcek" class="measurement-button">Personel Değerlendirme Ölçeği</a>
+            <a href="javascript:void(0);" onclick="completeEvaluation()" class="complete-button">Değerlendirmeyi Tamamla</a>
         </div>
-        <div class="puan-box">
-            <strong>Eğitim Düzeyi:</strong> <?= $user['egitim_duzeyi']; ?>
-        </div>
-        <div class="puan-box">
-            <strong>Yabancı Dil Puanı:</strong> <?= $user['yabanci_dil']; ?>
-        </div>
-        <div class="puan-box">
-            <strong>Kurum içi eğitim verme:</strong> <?= $user['egitim_veren']; ?> görev
-        </div>
-        <div class="puan-box">
-            <strong>Kurum dışı eğitimlere katılım:</strong> <?= $user['egitim_katilan']; ?> sertifika
-        </div>
-        <div class="puan-box">
-            <strong>Komisyon/kurul görevleri:</strong> <?= $user['komisyon_gorevi']; ?> görev
-        </div>
-        <div class="puan-box">
-            <strong>Düzeltici iyileştirici faaliyetler:</strong> <?= $user['duzeltici_faaliyet']; ?> adet
-        </div>
-        <div class="puan-box">
-            <strong>Kurum içi panel/etkinlik katılımı:</strong> <?= $user['kurum_ici_panel']; ?> etkinlik
-        </div>
-        <div style="text-align: center; margin-top: 20px;">
-            <a href="javascript:history.back()" class="index-link" style="text-decoration: none; color: #3366cc; font-weight: bold;">Geri</a>
+
+        <div id="success-message" class="success-message" style="display: none;">
+            Personel değerlendirmesi başarı ile kaydedilmiştir!
         </div>
     </div>
 </body>

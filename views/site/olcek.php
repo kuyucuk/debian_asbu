@@ -9,7 +9,9 @@ $this->title = 'Performans Ölçüm Formu';
     <h2>ANKARA SOSYAL BİLİMLER ÜNİVERSİTESİ<br>İDARİ PERSONEL PERFORMANS ÖLÇÜM KRİTERLERİ</h2>
     <p><strong>1. İŞ BECERİSİ (Her soru 1 puan, Ağırlık %30)</strong></p>
 
-    <?php $form = ActiveForm::begin(); ?>
+    <?php $form = ActiveForm::begin([
+        'options' => ['onsubmit' => 'return handleFormSubmit(event)']
+    ]); ?>
 
     <table class="table table-bordered">
         <thead>
@@ -60,11 +62,11 @@ $this->title = 'Performans Ölçüm Formu';
 
             foreach ($sorular as $i => $soru) {
                 $numara = $i + 1;
-                echo "<tr>";
+                echo "<tr class='soru-row' data-row='$i'>";
                 echo "<td>1.$numara</td>";
                 echo "<td class='text-left'>$soru</td>";
                 for ($j = 5; $j >= 1; $j--) {
-                    echo "<td><input type='radio' name='cevap[$i]' value='$j'></td>";
+                    echo "<td><input type='radio' name='cevap[$i]' value='$j' class='cevap' data-row='$i' onchange='updateRowColor($i)'></td>";
                 }
                 echo "</tr>";
             }
@@ -72,8 +74,9 @@ $this->title = 'Performans Ölçüm Formu';
         </tbody>
     </table>
 
-    <div class="form-group">
-        <?= Html::submitButton('Gönder', ['class' => 'btn btn-primary']) ?>
+    <div class="form-group text-right">
+        <button type="button" class="btn btn-secondary" style="background-color:red; color: white;" onclick="window.history.back()">Geri</button>
+        <?= Html::submitButton('Kaydet', ['class' => 'btn btn-primary']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>
@@ -87,12 +90,63 @@ body {
     overflow-x: auto;
 }
 th, td {
-    /*white-space: nowrap;*/
     vertical-align: middle;
     text-align: center;
 }
 th:first-child, td:first-child, td:nth-child(2) {
-    text-align: left;
+    text-align: right;
+}
+.form-group.text-right {
+    text-align: right;
+}
+.soru-row.answered {
+    background-color: #28a745; /* Yeşil renk */
+    color: white;
 }
 </style>
 
+<script>
+function updateRowColor(rowIndex) {
+    const row = document.querySelector(`.soru-row[data-row='${rowIndex}']`);
+    const inputs = row.querySelectorAll('.cevap');
+    const isAnswered = Array.from(inputs).some(input => input.checked);
+
+    if (isAnswered) {
+        row.classList.add('answered');
+    } else {
+        row.classList.remove('answered');
+    }
+}
+
+function handleFormSubmit(event) {
+    event.preventDefault(); // Formun varsayılan gönderimini engelle
+
+    let allAnswered = true;
+    const inputs = document.querySelectorAll('.cevap');
+
+    // Kontrol
+    const groupedInputs = {};
+    inputs.forEach(input => {
+        const row = input.dataset.row;
+        if (!groupedInputs[row]) {
+            groupedInputs[row] = [];
+        }
+        groupedInputs[row].push(input);
+    });
+
+    for (const group in groupedInputs) {
+        const isAnswered = groupedInputs[group].some(input => input.checked);
+        if (!isAnswered) {
+            allAnswered = false;
+        }
+    }
+
+    if (!allAnswered) {
+        alert('Lütfen tüm soruları cevaplayınız.');
+        return false;
+    }
+
+    alert('Ölçüm kaydedilmiştir');
+    window.history.back(); // Bir önceki sayfaya dön
+}
+</script>
