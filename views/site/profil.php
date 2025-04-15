@@ -171,11 +171,12 @@ $user = [
 
         <div class="section-title">Kişisel Bilgiler</div>
         <div class="profile-item"><label>Ünvan:</label> <?= htmlspecialchars($user['title']); ?></div>
+        <div class="profile-item"><label>Birim:</label> <?= htmlspecialchars($user['unit']); ?></div>
         <div class="profile-item"><label>Kurum Sicil No:</label> <?= htmlspecialchars($user['institution_id']); ?></div>
         <div class="profile-item"><label>E-posta:</label> <?= htmlspecialchars($user['email']); ?></div>
         <div class="profile-item"><label>Telefon:</label> <?= htmlspecialchars($user['phone']); ?></div>
         <div class="profile-item"><label>Doğum Tarihi:</label> <?= htmlspecialchars($user['birth_date']); ?></div>
-        <div class="profile-item"><label>Birim:</label> <?= htmlspecialchars($user['unit']); ?></div>
+        
 
         <div class="section-title">Değerlendirme Bilgileri</div>
         <?php
