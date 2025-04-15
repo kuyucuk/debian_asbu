@@ -338,7 +338,12 @@
             const row = e.target.closest('tr');
             if (row) {
         const sicilNo = row.dataset.sicilno;
-        window.location.href = `/index.php?r=site/profil&sicilno=${encodeURIComponent(sicilNo)}`;
+        const name = row.dataset.name;
+        const surname = row.dataset.surname;
+        const title = row.dataset.title;
+        const department = row.dataset.department;
+        window.location.href = `/index.php?r=site/profil&sicilno=${encodeURIComponent(sicilNo)}&name=${encodeURIComponent(name)}&surname=${encodeURIComponent(surname)}&title=${encodeURIComponent(title)}&department=${encodeURIComponent(department)}`;
+
     }
 });
     </script>

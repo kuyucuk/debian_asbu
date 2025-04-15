@@ -1,15 +1,27 @@
 <?php
 $sicilNo = $_GET['sicilno'] ?? null;
+$name = $_GET['name'] ?? 'Ad';
+$surname = $_GET['surname'] ?? 'Soyad Bilinmiyor';
+$title = $_GET['title'] ?? 'Ünvan Bilinmiyor';
+$department = $_GET['department'] ?? 'Birim Bilinmiyor';
 
 // Örnek kullanıcı bilgileri ve değerlendirme puanları
 $user = [
     'profile_photo' => 'https://bidb.asbu.edu.tr/sites/idari_birimler/bidb.asbu.edu.tr/files/styles/medium/public/inline-images/tolga.png?itok=92GE3EVR',
-    'name' => 'Tolga Kuyucuk',
-    'email' => 'tolga.kuyucuk@asbu.edu.tr',
+    'name' => $name . ' ' . $surname,
+    'email' => strtolower(str_replace(
+        ['ç', 'ğ', 'ı', 'ö', 'ş', 'ü', 'Ç', 'Ğ', 'İ', 'Ö', 'Ş', 'Ü'],
+        ['c', 'g', 'i', 'o', 's', 'u', 'C', 'G', 'I', 'O', 'S', 'U'],
+        $name
+    ) . '.' . str_replace(
+        ['ç', 'ğ', 'ı', 'ö', 'ş', 'ü', 'Ç', 'Ğ', 'İ', 'Ö', 'Ş', 'Ü'],
+        ['c', 'g', 'i', 'o', 's', 'u', 'C', 'G', 'I', 'O', 'S', 'U'],
+        $surname
+    )) . '@asbu.edu.tr',
     'phone' => '543-906-2143',
     'birth_date' => '08.02.1994',
-    'title' => 'Öğretim Görevlisi',
-    'institution_id' => 'A-519',
+    'title' => $title,
+    'institution_id' => $sicilNo,
     'hizmet_yili' => '1 yıl',
     'egitim_duzeyi' => 'Yüksek Lisans',
     'yabanci_dil' => 'KPDS 72',
@@ -18,7 +30,7 @@ $user = [
     'komisyon_gorevi' => 2,
     'duzeltici_faaliyet' => 1,
     'kurum_ici_panel' => 2,
-    'unit' => 'Bilgi İşlem Daire Başkanlığı'
+    'unit' => $department
 ];
 ?>
 
