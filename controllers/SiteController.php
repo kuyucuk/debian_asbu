@@ -139,6 +139,7 @@ class SiteController extends Controller
 public function actionPersonelpaneli()
 {
     return $this->render('personelpaneli');
+    
 }
 public function actionSifreunutma()
 {
@@ -149,6 +150,12 @@ public function actionProfil()
 {
     return $this->render('profil');
 }
+public function actionKullaniciyonetimi()
+{
+    return $this->render('kullaniciyonetimi');
+}
+
+
 
 
 

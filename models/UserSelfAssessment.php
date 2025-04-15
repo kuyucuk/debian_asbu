@@ -17,7 +17,8 @@ class UserSelfAssessment extends ActiveRecord
 {
     return [
         [['user_id', 'service_years', 'educational_level', 'foreign_language_score'], 'required'],
-        [['user_id', 'foreign_language_score', 'internal_training_count', 'external_training_count', 'committee_participation_count', 'internal_meeting_count'], 'integer'],
+        [['user_id', 'internal_training_count', 'external_training_count', 'committee_participation_count', 'internal_meeting_count'], 'integer'],
+        [['foreign_language_score'], 'string', 'max' => 50],
         [['education_given', 'improvement_activity'], 'boolean'],
         [['service_years'], 'string', 'max' => 20],
         [['educational_level'], 'string', 'max' => 50],

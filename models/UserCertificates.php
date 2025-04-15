@@ -1,4 +1,3 @@
-
 <?php
 
 namespace app\models;
@@ -61,8 +60,24 @@ class UserCertificates extends \yii\db\ActiveRecord
             $extension = pathinfo($this->document_file_path, PATHINFO_EXTENSION); // Dosya uzantısını al
             $uniqueName = Yii::$app->security->generateRandomString(10) . '.' . $extension; // Benzersiz isim oluştur
             $this->document_file_path = 'uploads/certificates/' . $uniqueName; // Yeni dosya yolu oluştur
+            // Dosyayı hedef dizine taşımak
+            $fullPath = Yii::getAlias('@webroot/') . $this->document_file_path;
+            // Yükleme işlemi
+            if (file_exists($fullPath)) {
+                unlink($fullPath); // Eğer dosya zaten varsa, silin
+            }
+
+            // Dosyayı kaydet
+            $file = UploadedFile::getInstance($this, 'document_file'); // dosya input name
+            if ($file) {
+                if ($file->saveAs($fullPath)) {
+                    Yii::info('Dosya başarıyla kaydedildi: ' . $this->document_file_path);
+                } else {
+                    Yii::error('Dosya kaydedilemedi: ' . $this->document_file_path);
+                }
+            }
              // Yüklenen dosyayı hedef dizine taşınması
-             if ($this->document_file_path && $this->save()) {
+             /*if ($this->document_file_path && $this->save()) {
                 // Dosya kaydetme işlemi
                 $file = $this->document_file_path; // Hedef dosya yolu
                 $uploadedFile = Yii::$app->basePath . '/web/' . $file; // Tam dosya yolu
@@ -70,7 +85,7 @@ class UserCertificates extends \yii\db\ActiveRecord
                     // Hata durumu
                     Yii::error("Dosya kaydedilemedi: " . $file);
                 }
-            }
+            }*/
         }
         return true;
     }

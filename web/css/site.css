@@ -1,201 +1,30 @@
-
-/* ========== GENEL SAYFA DÜZENİ ========== */
-/* 100vh sorunu: min-height ve overflow ekledik */
-body {
-    font-family: Arial, sans-serif;
-    background: #FFFfff;
-    min-height: 100vh; /* Sabit yükseklik yerine */
-    margin: 0;
-    display: flex;
-    flex-direction: column; /* İçerik akışını düzelttik */
-}
-
-main > .container {
-    padding: 70px 15px 20px;
-    flex: 1; /* Alt içerik kaymasını önler */
-    overflow: auto; /* Taşan içerik için kaydırma */
-}
-
-/* ========== NAVBAR İYİLEŞTİRMELERİ ========== */
-.navbar {
-    position: fixed;
-    top: 0;
-    width: 100%;
-    z-index: 1000;
-    min-height: 60px; /* Sabit yükseklik sorunu çözümü */
-    flex-wrap: wrap; /* Mobilde satır kayması için */
-}
-
-.navbar-dark {
-    background-color: #793657 !important;
-}
-
-/* Mobil menü için optimize stil */
-@media(max-width:767px) {
-    .navbar-collapse {
-        padding: 15px 0;
-    }
-    
-    .nav-link {
-        padding: 10px 15px !important;
-    }
-}
-
-/* ========== GİRİŞ FORMU RESPONSIVE DÜZEN ========== */
-.login-container {
-    background: white;
-    padding: 30px; /* rem yerine px */
-    border-radius: 10px;
-    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2);
-    text-align: center;
-    width: 90%; /* min() fonksiyonu kaldırıldı */
-    max-width: 400px; /* Sabit maksimum genişlik */
-    margin: 0 auto; /* Eski ortalama yöntemi */
-}
-
-/* Yazı boyutlarını responsive yapalım */
-h2 {
-    color: #800000;
-    margin-bottom: 1.25rem;
-    font-size: clamp(1.5rem, 4vw, 2rem); /* Dinamik font boyutu */
-}
-
-/* ========== RESPONSIVE TABLO STİLLERİ ========== */
-.grid-view th {
-    white-space: nowrap;
-    font-size: 0.9rem; /* Küçük ekranlar için */
-}
-
-@media(max-width: 992px) {
-    .grid-view table {
-        display: block;
-        overflow-x: auto; /* Yatay kaydırma için */
-    }
-}
-
-/* ========== FOOTER DÜZENİ ========== */
-.footer {
-    background-color: #f5f5f5;
-    font-size: .9em;
-    min-height: 60px; /* Sabit yükseklik sorunu çözümü */
-    display: flex;
-    align-items: center;
-}
-
-.footer > .container {
-    padding: 15px;
-    width: 100%;
-    text-align: center;
-}
-
-/* ========== DİĞER İYİLEŞTİRMELER ========== */
-/* Tüm padding/margin'leri relative unit yapalım */
-.form-group {
-    margin-bottom: 1rem;
-}
-
-button {
-    padding: 0.625rem 1rem; /* 10px 16px yerine */
-    font-size: 1rem;
-}
-
-/* Yazıların zoom'da kaybolmaması için */
-body {
-    font-size: clamp(14px, 1.5vw, 16px); /* Dinamik font boyutu */
-    line-height: 1.6;
-}
-
-/* Resimler için maksimum genişlik */
-img {
-    max-width: 100%;
-    height: auto;
-}
-
-/* Özel renkler için CSS değişkenleri */
+/* ========== DEĞİŞKENLER ========== */
 :root {
     --primary-color: #793657;
     --secondary-color: #800000;
+    --hover-color: #5c2a42;
+    --light-bg: #f5f5f5;
+    --text-dark: #333;
 }
 
-.login-button {
-    background: var(--primary-color);
-}
-
-.extra-links a {
-    color: var(--primary-color);
-}
-
-
-input {
-    width: 100%;
-    padding: 10px;
-    margin-top: 10px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-}
-
-button {
-    margin-top: 20px;
-    padding: 10px 15px;
-    border-radius: 5px;
-    border: none;
-    cursor: pointer;
-    font-size: 16px;
-    color: white;
-}
-
-.login-button {
-    background: #793657; /* Bordo */
-}
-
-.login-button:hover {
-    background: rgb(86, 94, 90); /* Daha koyu bordo */
-}
-
-/* Alt Bağlantılar */
-.extra-links {
-    margin-top: 20px;
-    font-size: 14px;
-}
-
-.extra-links a {
-    text-decoration: none;
-    color: #793657; /* Bordo */
-    transition: 0.3s;
-}
-
-/* Mobil uyum için */
-@media (max-width: 768px) {
-    .jumbotron .d-flex {
-        flex-direction: column;
-    }
-    .jumbotron img {
-        margin-right: 0 !important;
-        margin-bottom: 15px;
-    }
-}
-
-/* Yönetici paneli */
+/* ========== GENEL STİLLER ========== */
 body {
     font-family: Arial, sans-serif;
     background-color: #ffffff;
+    color: var(--text-dark);
     margin: 0;
-    padding: 20px;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    font-size: clamp(14px, 1.5vw, 16px);
+    line-height: 1.6;
 }
 
-.panel-container {
-    max-width: 800px;
-    margin: 50px auto;
-    background: white;
-    padding: 30px;
-    border-radius: 8px;
-    box-shadow: 0 0 15px rgba(0,0,0,0.1);
-}
-
-h1 {
-    color: #333;
+h1, h2 {
+    color: var(--secondary-color);
     text-align: center;
-    margin-bottom: 30px;
+    margin-bottom: 1.5rem;
+    font-size: clamp(1.5rem, 4vw, 2rem);
 }
 
 ul {
@@ -203,23 +32,173 @@ ul {
     padding: 0;
 }
 
-li {
-    margin: 15px 0;
+a {
+    text-decoration: none;
+    transition: 0.3s;
 }
 
-li a {
-    display: block;
-    padding: 12px;
-    background: #793657;
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* ========== KAPSAYICILAR ========== */
+main > .container, .panel-container {
+    max-width: 1000px;
+    margin: 30px auto;
+    padding: 25px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 15px rgba(0,0,0,0.08);
+}
+
+.panel-container {
+    max-width: 98%;
+}
+
+@media (max-width: 576px) {
+    .panel-container {
+        margin: 20px 10px;
+        padding: 20px;
+    }
+}
+
+/* ========== NAVBAR ========== */
+.navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    min-height: 60px;
+    flex-wrap: wrap;
+}
+
+.navbar-dark {
+    background-color: var(--primary-color) !important;
+}
+
+@media(max-width: 767px) {
+    .navbar-collapse {
+        padding: 15px 0;
+    }
+
+    .nav-link {
+        padding: 10px 15px !important;
+    }
+}
+
+/* ========== FORM VE BUTONLAR ========== */
+.login-container, .filter-section select, input, button {
+    border-radius: 5px;
+    transition: all 0.3s ease;
+}
+
+.login-container {
+    background: white;
+    padding: 30px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    width: 90%;
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+input, .filter-section select {
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    border: 1px solid #ddd;
+}
+
+button {
+    padding: 10px 15px;
+    margin-top: 20px;
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+    color: white;
+    background: var(--primary-color);
+}
+
+button:hover {
+    background: var(--hover-color);
+}
+
+.filter-section select:hover {
+    background-color: #fff;
+    border-color: var(--primary-color);
+    box-shadow: 0 2px 8px rgba(121, 54, 87, 0.1);
+}
+
+/* ========== TABLOLAR ========== */
+.user-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    background: white;
+    border-radius: 8px;
+}
+
+.user-table th, .user-table td {
+    padding: 14px 16px;
+    text-align: left;
+    border-bottom: 1px solid #f0f0f0;
+    white-space: nowrap;
+}
+
+.user-table th {
+    background-color: var(--primary-color);
+    color: white;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+
+.user-table tr:hover {
+    background-color: #fafafa;
+}
+
+/* ========== RESPONSIVE AYARLAR ========== */
+@media (max-width: 1200px) {
+    .filter-section {
+        grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    }
+}
+
+@media (max-width: 992px) {
+    .filter-section {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+    }
+}
+
+@media (max-width: 576px) {
+    .filter-section {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ========== DİĞER STİLLER ========== */
+.extra-links a, li a {
+    color: var(--primary-color);
+    background: var(--primary-color);
     color: white !important;
     text-align: center;
-    text-decoration: none;
+    padding: 12px;
+    display: block;
     border-radius: 5px;
-    transition: background 0.3s;
 }
 
-li a:hover {
-    background: #5c2a42;
+.extra-links a:hover, li a:hover {
+    background: var(--hover-color);
 }
-/* Yönetici paneli sonu */
 
+.footer {
+    background-color: var(--light-bg);
+    font-size: 0.9em;
+    min-height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 15px;
+    text-align: center;
+}
