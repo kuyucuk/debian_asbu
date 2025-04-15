@@ -48,7 +48,7 @@ $this->registerCss($css);
 <body>
     <div class="panel-container">
         <h2>Şifremi Unuttum</h2>
-        <p>ASBU mail şifreniz, sistem şifreniz ile aynıdır. Eğer bu şifrenizi de hatırlamıyorsanız, teknik destek almak için aşağıdaki bağlantıya tıklayabilirsiniz.</p>
+        <p>ASBU mail şifreniz, sistem şifreniz ile aynıdır. Yaşadığınız problemlerle ilgili teknik destek almak için aşağıdaki bağlantıya tıklayabilirsiniz.</p>
         <a href="https://teknikdestek.asbu.edu.tr/" class="support-link">Teknik Destek Al</a>
         <a href="/index.php" class="index-link">İdari Personel Performans Ölçümü Sayfasına Dön</a>
     </div>

@@ -124,7 +124,7 @@
 
             $names = ['Ahmet', 'Mehmet', 'Ayşe', 'Fatma', 'Ali', 'Veli', 'Zeynep', 'Emre', 'Can', 'Elif', 'Tolga', 'Merve', 'Burcu', 'Cem', 'Deniz', 'Ece', 'Gizem', 'Hüseyin', 'İlayda', 'Kaan', 'Lara', 'Mert', 'Nisa', 'Oğuz', 'Pelin', 'Seda', 'Tuna', 'Uğur', 'Vildan', 'Yasin'];
             $surnames = ['Yılmaz', 'Kaya', 'Demir', 'Çelik', 'Arslan', 'Koç', 'Şahin', 'Yıldız', 'Aksoy', 'Öztürk', 'Aydın', 'Polat', 'Kurt', 'Tekin', 'Çetin', 'Kara', 'Aslan', 'Güneş', 'Özdemir', 'Yavuz', 'Sönmez', 'Acar', 'Duman', 'Erdem', 'Kaya', 'Uçar', 'Yücel', 'Korkmaz', 'Turan'];
-            $titles = ['Şube Müdürü','Enstitü Müdürü', 'Şef', 'Daire Başkanı', 'Koordinatör','Memur','Genel Sekreter','Dekan','Yardımcı Personel','Teknik Personel'];
+            $titles = ['Merkez Müdürü','Enstitü Müdürü', 'Enstitü Sekreteri', 'Daire Başkanı', 'Koordinatör','Fakülte Sekreteri','Genel Sekreter','Dekan','Yüksekokul Müdürü','Yüksekokul Sekreteri'];
             $departments = ['Personel Daire Başkanlığı', 'Mali İşler Daire Başkanlığı', 'Bilgi İşlem Daire Başkanlığı', 'Rektörlük', 'Hukuk Fakültesi', 'İktisadi ve İdari Bilimler Fakültesi', 'Erasmus Koordinatörlüğü', 'Sosyal Bilimler Enstitüsü'];
 
             $sicilList = [];
