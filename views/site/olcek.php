@@ -94,7 +94,7 @@ th, td {
     text-align: center;
 }
 th:first-child, td:first-child, td:nth-child(2) {
-    text-align: right;
+    text-align: left;
 }
 .form-group.text-right {
     text-align: right;
