@@ -111,19 +111,19 @@
         <table class="user-table">
             <thead>
                 <tr>
-                    <th>Sıra No</th>
-                    <th>Sicil No</th>
-                    <th>Ad</th>
-                    <th>Soyad</th>
-                    <th>Ünvan</th>
-                    <th>Birim</th>
+                    <th data-sort-key="index">Sıra No<span class="sort-indicator"></span></th>
+                    <th data-sort-key="sicilno">Sicil No<span class="sort-indicator"></span></th>
+                    <th data-sort-key="name">Ad<span class="sort-indicator"></span></th>
+                    <th data-sort-key="surname">Soyad<span class="sort-indicator"></span></th>
+                    <th data-sort-key="title">Ünvan<span class="sort-indicator"></span></th>
+                    <th data-sort-key="department">Birim<span class="sort-indicator"></span></th>
                 </tr>
-            </thead>
+            </thead>    
             <tbody id="user-table-body">
             <?php
             $personnelCount = 5000;
 
-            $names = ['Tolga','Merve','Ahmet', 'Mehmet', 'Ayşe', 'Fatma', 'Ali', 'Veli', 'Zeynep', 'Emre', 'Can', 'Elif', 'Burcu', 'Cem', 'Deniz', 'Ece', 'Gizem', 'Hüseyin', 'İlayda', 'Kaan', 'Lara', 'Mert', 'Nisa', 'Oğuz', 'Pelin', 'Seda', 'Tuna', 'Uğur', 'Vildan', 'Yasin', 'Zehra', 'Aylin', 'Berk', 'Cansu', 'Derya', 'Efe', 'Furkan', 'Gökhan', 'Hakan', 'Işıl', 'Jale', 'Kerem', 'Leman', 'Melek', 'Nehir', 'Oğuzhan', 'Pınar', 'Rabia', 'Sinem', 'Tamer', 'Ulaş', 'Veysel', 'Yasemin', 'Ziya', 'Aysel', 'Berkay', 'Cemre', 'Dilan', 'Eylül', 'Fikret', 'Gizem', 'Hülya', 'İbrahim', 'Kübra', 'Lütfiye', 'Melek', 'Nihal', 'Oğuzhan', 'Pınar', 'Rabia', 'Seda', 'Tamer', 'Uğur', 'Veysel', 'Yasemin', 'Ziya', 'Aysel', 'Berkay', 'Cemre', 'Dilan', 'Eylül', 'Fikret', 'Gizem', 'Hülya', 'İbrahim', 'Kübra', 'Lütfiye', 'Melek', 'Nihal','Beste', 'Seher', 'Zafer', 'Nuriye', 'Esra'];
+            $names = ['Tolga','Merve','Ahmet', 'Mehmet', 'Ayşe', 'Fatma', 'Ali', 'Veli', 'Zeynep', 'Emre', 'Can', 'Elif', 'Burcu', 'Cem', 'Deniz', 'Ece', 'Gizem', 'Hüseyin', 'İlayda', 'Kaan', 'Lara', 'Mert', 'Nisa', 'Oğuz', 'Pelin', 'Seda', 'Tuna', 'Uğur', 'Vildan', 'Yasin', 'Zehra', 'Aylin', 'Berk', 'Cansu', 'Derya', 'Efe', 'Furkan', 'Gökhan', 'Hakan', 'Işıl', 'Jale', 'Kerem', 'Leman', 'Melek', 'Nehir', 'Oğuzhan', 'Pınar', 'Rabia', 'Sinem', 'Tamer', 'Ulaş', 'Veysel', 'Yasemin', 'Ziya', 'Aysel', 'Berkay', 'Cemre', 'Dilan', 'Eylül', 'Fikret', 'Gizem', 'Hülya', 'İbrahim', 'Kübra', 'Lütfiye', 'Melek', 'Nihal', 'Oğuzhan', 'Pınar', 'Rabia', 'Seda', 'Tamer', 'Uğur', 'Veysel', 'Yasemin', 'Ziya', 'Aysel', 'Berkay', 'Cemre', 'Dilan', 'Eylül', 'Fikret', 'Gizem', 'Hülya', 'İbrahim', 'Kübra', 'Lütfiye', 'Melek', 'Nihal','Beste', 'Seher', 'Zafer', 'Nuriye','Esra'];
             $surnames = ['Kuyucuk','Yaldız','Yılmaz', 'Kaya', 'Demir', 'Çelik', 'Arslan', 'Koç', 'Şahin', 'Yıldız', 'Aksoy', 'Öztürk', 'Aydın', 'Polat', 'Kurt', 'Tekin', 'Çetin', 'Kara', 'Aslan', 'Güneş', 'Özdemir', 'Yavuz', 'Sönmez', 'Acar', 'Duman', 'Erdem', 'Kaya', 'Uçar', 'Yücel', 'Korkmaz', 'Turan', 'Mimaroğlu', 'Altınay', 'Akbaba', 'Buldu', 'Toru', 'Baktır', 'Matur', 'Aydemir', 'Çetinkaya', 'Aydoğdu', 'Şahin'];
             $titles = ['Merkez Müdürü','Enstitü Müdürü', 'Enstitü Sekreteri', 'Daire Başkanı', 'Koordinatör','Fakülte Sekreteri','Genel Sekreter','Dekan','Yüksekokul Müdürü','Yüksekokul Sekreteri'];
             $departments = ['Personel Daire Başkanlığı', 'Mali İşler Daire Başkanlığı', 'Bilgi İşlem Daire Başkanlığı', 'Rektörlük', 'Hukuk Fakültesi', 'İktisadi ve İdari Bilimler Fakültesi', 'Erasmus Koordinatörlüğü', 'Sosyal Bilimler Enstitüsü'];
@@ -194,7 +194,9 @@
             <a href="javascript:history.back()" class="back-button">Geri</a>
         </div>
     </div>
+        
 
+    
     <!-- JavaScript: Sayfalama -->
     <script>
         const rows = Array.from(document.querySelectorAll(".user-table tbody tr"));
@@ -214,41 +216,139 @@
             const activeButton = document.getElementById("page" + page);
             if (activeButton) activeButton.classList.add("active");
         }
+        let currentSort = { key: null, direction: 'asc' };
+
+        function sortTable(key) {
+            const tbody = document.getElementById('user-table-body');
+            const allRows = Array.from(document.querySelectorAll('.user-table tbody tr'));
+
+            if (currentSort.key === key) {
+            currentSort.direction = currentSort.direction === 'asc' ? 'desc' : 'asc';
+            } else {
+            currentSort.key = key;
+            currentSort.direction = 'asc';
+            }
+
+            allRows.sort((a, b) => {
+            let aValue, bValue;
+
+            if (key === 'index') {
+                aValue = parseInt(a.children[0].textContent);
+                bValue = parseInt(b.children[0].textContent);
+            } else {
+                aValue = a.dataset[key];
+                bValue = b.dataset[key];
+
+                // Handle Turkish alphabet sorting
+                const turkishCollator = new Intl.Collator('tr', { sensitivity: 'base' });
+                return currentSort.direction === 'asc'
+                ? turkishCollator.compare(aValue, bValue)
+                : turkishCollator.compare(bValue, aValue);
+            }
+
+            return currentSort.direction === 'asc' ? aValue - bValue : bValue - aValue;
+            });
+
+            // Rebuild tbody
+            tbody.innerHTML = '';
+            allRows.forEach(row => tbody.appendChild(row));
+
+            // Update sort indicators
+            document.querySelectorAll('.sort-indicator').forEach(indicator => {
+            indicator.textContent = '';
+            });
+            const activeHeader = document.querySelector(`th[data-sort-key="${key}"]`);
+            activeHeader.querySelector('.sort-indicator').textContent =
+            currentSort.direction === 'asc' ? '▲' : '▼';
+
+            // Reset pagination to include all rows
+            rows.length = allRows.length;
+            rows.splice(0, rows.length, ...allRows);
+
+            // Update pagination and filtering
+            currentPageGroup = 1;
+            createPagination();
+            showPage(1);
+        }
+
+        // Add click event to headers
+        document.querySelectorAll('.user-table th').forEach(header => {
+            header.addEventListener('click', () => {
+            const sortKey = header.dataset.sortKey;
+            sortTable(sortKey);
+            });
+        });
 
         function createPagination() {
             pagination.innerHTML = "";
             totalPages = Math.ceil(rows.length / rowsPerPage);
             const startPage = (currentPageGroup - 1) * maxPagesPerGroup + 1;
-            const endPage = Math.min(startPage + maxPagesPerGroup - 1, totalPages);
+            const endPage = Math.min(startPage + maxPagesPerGroup, totalPages);
 
+            // Add "First" button
             if (currentPageGroup > 1) {
-                const prevButton = document.createElement("button");
-                prevButton.innerText = "<<";
-                prevButton.onclick = () => {
-                    currentPageGroup--;
-                    createPagination();
-                    showPage((currentPageGroup - 1) * maxPagesPerGroup + 1);
-                };
-                pagination.appendChild(prevButton);
+            const firstButton = document.createElement("button");
+            firstButton.innerText = "|<";
+            firstButton.onclick = () => {
+                currentPageGroup = 1;
+                createPagination();
+                showPage(1);
+            };
+            pagination.appendChild(firstButton);
             }
 
+            // Add "<<" button
+            if (currentPageGroup > 1) {
+            const prevButton = document.createElement("button");
+            prevButton.innerText = "<<";
+            prevButton.onclick = () => {
+                currentPageGroup--;
+                createPagination();
+                showPage((currentPageGroup - 1) * maxPagesPerGroup + 1);
+            };
+            pagination.appendChild(prevButton);
+            }
+
+            // Add page buttons
             for (let i = startPage; i <= endPage; i++) {
-                const btn = document.createElement("button");
-                btn.innerText = i;
-                btn.id = "page" + i;
-                btn.onclick = () => showPage(i);
-                pagination.appendChild(btn);
+            const btn = document.createElement("button");
+            btn.innerText = i;
+            btn.id = "page" + i;
+            btn.onclick = () => {
+                if (i === endPage && endPage < totalPages) {
+                currentPageGroup++;
+                createPagination();
+                } else if (i === startPage && startPage > 1) {
+                currentPageGroup--;
+                createPagination();
+                }
+                showPage(i);
+            };
+            pagination.appendChild(btn);
             }
 
+            // Add ">>" button
             if (endPage < totalPages) {
-                const nextButton = document.createElement("button");
-                nextButton.innerText = ">>";
-                nextButton.onclick = () => {
-                    currentPageGroup++;
-                    createPagination();
-                    showPage((currentPageGroup - 1) * maxPagesPerGroup + 1);
-                };
-                pagination.appendChild(nextButton);
+            const nextButton = document.createElement("button");
+            nextButton.innerText = ">>";
+            nextButton.onclick = () => {
+                currentPageGroup++;
+                createPagination();
+                showPage((currentPageGroup - 1) * maxPagesPerGroup + 1);
+            };
+            pagination.appendChild(nextButton);
+            }
+
+            // Add "Last" button
+            if (endPage < totalPages) {
+            const lastButton = document.createElement("button");
+            lastButton.innerText = ">|";
+            lastButton.onclick = () => {
+                currentPageGroup = Math.ceil(totalPages / maxPagesPerGroup);
+                createPagination();
+                showPage(totalPages);
+            };
+            pagination.appendChild(lastButton);
             }
         }
 
@@ -350,5 +450,4 @@
     
 </body>
 </html>
-
 
