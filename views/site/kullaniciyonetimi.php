@@ -6,83 +6,7 @@ $this->title = 'Yönetim Paneli';
 ?>    <meta charset="UTF-8">
     <title>$title</title>
     <link rel="stylesheet" href="styles.css">
-    <style>
-        body {
-            max-width: 1600px;
-            margin: 0 auto;
-            font-family: Arial, sans-serif;
-            padding: 20px;
-        }
-        h1 {
-            text-align: center;
-            color: #793657;
-        }
-        .filter-section {
-            margin-bottom: 25px;
-            display: flex;
-            justify-content: space-between;
-            flex-wrap: wrap;
-            gap: 10px;
-        }
-        .filter-section select {
-            padding: 8px 12px;
-            border-radius: 5px;
-            border: 1px solid #ddd;
-        }
-        .user-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
-        }
-        .user-table th, .user-table td {
-            padding: 12px;
-            text-align: left;
-            border-bottom: 1px solid #eee;
-        }
-        .user-table th {
-            background-color: #793657;
-            color: white;
-        }
-        .user-table tr:hover {
-            background-color: #f5f5f5;
-        }
-        .user-table tbody tr {
-            cursor: pointer;
-        }
-        .back-link {
-            margin-top: 20px;
-            text-align: center;
-        }
-        .back-link a {
-            color: #793657;
-            text-decoration: none;
-            font-weight: bold;
-        }
-        .back-link a:hover {
-            text-decoration: underline;
-        }
-        .pagination {
-            text-align: center;
-            margin-top: 20px;
-        }
-        .pagination button {
-            background: #d9b3c4;
-            border: 1px solid #a0527d;
-            padding: 5px 10px;
-            margin: 2px;
-            cursor: pointer;
-            color: #793657;
-        }
-        .pagination button.active {
-            background: #793657;
-            color: white;
-            font-weight: bold;
-        }
-        .rows-per-page {
-            margin-bottom: 20px;
-            text-align: right;
-        }
-    </style>
+    
 </head>
 <body>
     
@@ -192,9 +116,7 @@ $this->title = 'Yönetim Paneli';
         <!-- Sayfalama -->
         <div class="pagination" id="pagination"></div>
 
-        <div class="back-link">
-            <a href="javascript:history.back()" class="back-button">Geri</a>
-        </div>
+
     </div>
         
 

@@ -42,106 +42,7 @@ $user = [
 <head>
     <meta charset="UTF-8">
     <title>Kullanıcı Profili</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
-            background-color: #f5f5f5;
-        }
-        .profile-container {
-            max-width: 800px;
-            margin: auto;
-            padding: 20px;
-            border: 1px solid #ccc;
-            background-color: white;
-            border-radius: 10px;
-        }
-        .profile-header {
-            text-align: center;
-            margin-bottom: 20px;
-        }
-        .profile-photo {
-            width: 120px;
-            height: 120px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 2px solid #ccc;
-        }
-        .section-title {
-            font-weight: bold;
-            margin-top: 20px;
-            border-bottom: 1px solid #ccc;
-            padding-bottom: 5px;
-        }
-        .profile-item {
-            margin-bottom: 10px;
-        }
-        .profile-item label {
-            font-weight: bold;
-        }
-        .puan-box {
-            margin-top: 10px;
-            padding: 10px;
-            background-color: #eef;
-            border-left: 5px solid #3366cc;
-            border-radius: 5px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .puan-box.green {
-            background-color: #d4edda;
-            border-left-color: #28a745;
-        }
-        .puan-box label {
-            margin-right: auto;
-            font-weight: bold;
-        }
-        .radio-container {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        .radio-button {
-            margin-left: auto;
-        }
-        .button-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-top: 20px;
-            flex-wrap: wrap;
-        }
-        .button-container a {
-            text-decoration: none;
-            color: #fff;
-            font-weight: bold;
-            padding: 10px 20px;
-            border-radius: 5px;
-            margin-bottom: 10px;
-        }
-        .back-button {
-            background-color: #dc3545;
-        }
-        .measurement-button {
-            background-color: #3366cc;
-        }
-        .complete-button {
-            background-color: #28a745;
-            transition: background-color 0.3s ease;
-        }
-        .complete-button:active {
-            background-color: #218838;
-        }
-        .success-message {
-            text-align: center;
-            margin-top: 20px;
-            padding: 10px;
-            background-color: #d4edda;
-            color: rgb(88, 190, 112);
-            border-radius: 5px;
-        }
-    </style>
+    <link rel="stylesheet" href="/web/css/site.css"> <!-- site.css dosyasını dahil edin -->
     <script>
         function toggleApproval(radio, boxId) {
             const box = document.getElementById(boxId);
@@ -179,7 +80,6 @@ $user = [
         <div class="profile-item"><label>E-posta:</label> <?= htmlspecialchars($user['email']); ?></div>
         <div class="profile-item"><label>Telefon:</label> <?= htmlspecialchars($user['phone']); ?></div>
         <div class="profile-item"><label>Doğum Tarihi:</label> <?= htmlspecialchars($user['birth_date']); ?></div>
-        
 
         <div class="section-title">Değerlendirme Bilgileri</div>
         <?php
