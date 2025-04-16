@@ -1,3 +1,4 @@
+
 <?php
 
 use yii\helpers\Html;
@@ -16,7 +17,8 @@ use yii\web\UploadedFile;
     
     <h1><?= Html::encode($this->title) ?></h1>
 
-    <?php $form = ActiveForm::begin(['id' => 'self-assessment-form']); ?>
+    <?php $form = ActiveForm::begin(['id' => 'self-assessment-form', 
+                                    'options' => ['enctype' => 'multipart/form-data']]); ?>
 
     <!-- Soru 1: Radio Button Seçimi -->
     <!-- Asbü deki hizmet yılı -->
@@ -90,6 +92,9 @@ use yii\web\UploadedFile;
             0 => 'Hayır',
         ]) ?>
     </div>
+    <div id="improvement-file-upload" style="display:none;">
+    <?= $form->field($model, 'improvement_file')->fileInput() ?>
+</div>
 
     <!-- Soru 9: Dosya Yükleme -->
     <!-- Kurum içindeki panel, eğitim gibi toplantılara katılım sağlamıştır.
@@ -109,16 +114,26 @@ use yii\web\UploadedFile;
 $script = <<< JS
     // Sayfa yüklendiğinde belge alanını gizle
     $('#education-file-upload').hide();
+    $('#improvement-file-upload').hide();
 
     // Radio buton değiştiğinde kontrol et
+    // Eğitim verildi mi? (evet seçilirse dosya alanını göster)
     $('input[name="SelfAssessmentForm[education_given]"]').on('change', function() {
         if ($(this).val() == '1') {
-            $('#education-file-upload').slideDown();  // Evet seçildi
+            $('#education-file-upload').slideDown();
         } else {
-            $('#education-file-upload').slideUp();    // Hayır seçildi
+            $('#education-file-upload').slideUp();
+        }
+    });
+
+    // İyileştirme faaliyeti var mı? (evet seçilirse dosya alanını göster)
+    $('input[name="SelfAssessmentForm[improvement_activity]"]').on('change', function() {
+        if ($(this).val() == '1') {
+            $('#improvement-file-upload').slideDown();
+        } else {
+            $('#improvement-file-upload').slideUp();
         }
     });
 JS;
 
 $this->registerJs($script);
-?>
