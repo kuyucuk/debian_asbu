@@ -113,28 +113,30 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
     NavBar::end();
     ?>
 
-<header id="header">
-    <nav class="navbar">
-        <div class="navbar-title"><?= Html::encode($this->title) ?></div>
-        <?php if (!(Yii::$app->controller->id === 'site' && (Yii::$app->controller->action->id === 'index' || Yii::$app->controller->action->id === 'sifreunutma'))): ?>
-            <div class="profile-menu" style="display: flex; align-items: center;">
-                <div id="roleIndicator" style="color: white; margin-right: 15px; font-weight: bold;">Bilgi İşlem Daire Başkanlığı</div>
-                <div class="profile-icon" onclick="toggleDropdown()">
-                    <i class="fas fa-user-circle"></i>
-                </div>
-                <div class="dropdown-content" id="roleDropdown">
-                    <span class="dropdown-item" style="color: black; font-weight: bold; pointer-events: none;">Tolga Kuyucuk</span>
-                    <a href="/index.php" class="dropdown-item">Çıkış Yap</a>
-                    <div class="dropdown-item" style="cursor: pointer;" onclick="toggleRoleOptions()">Birim Değiştir</div>
-                    <div id="roleOptions" style="display: none; margin-top: 10px;">
-                        <a href="javascript:void(0);" class="dropdown-item" onclick="setRoleFilter('Bilgi İşlem Daire Başkanlığı'); updateRoleIndicator('Bilgi İşlem Daire Başkanlığı')">Bilgi İşlem Daire Başkanlığı</a>
-                        <a href="javascript:void(0);" class="dropdown-item" onclick="setRoleFilter('Erasmus Koordinatörlüğü'); updateRoleIndicator('Erasmus Koordinatörlüğü')">Erasmus Koordinatörlüğü</a>
+    <header id="header">
+        <nav class="navbar">
+            <?php if (Yii::$app->controller->id === 'site' && Yii::$app->controller->action->id === 'index'): ?>
+                <div class="navbar-title" style="margin: 0 auto; color: #793657; pointer-events: none;"><?= Html::encode('Tolga Kuyucuk') ?></div>
+            <?php else: ?>
+                <div class="navbar-title" style="margin-right: auto;"><?= Html::encode($this->title) ?></div>
+                <div class="profile-menu" style="display: flex; align-items: center;">
+                    <div id="roleIndicator" style="color: white; margin-right: 15px; font-weight: bold;">Bilgi İşlem Daire Başkanlığı</div>
+                    <div class="profile-icon" onclick="toggleDropdown()">
+                        <i class="fas fa-user-circle"></i>
+                    </div>
+                    <div class="dropdown-content" id="roleDropdown">
+                        <span class="dropdown-item" style="color: black; font-weight: bold; pointer-events: none;">Tolga Kuyucuk</span>
+                        <a href="/index.php" class="dropdown-item">Çıkış Yap</a>
+                        <div class="dropdown-item" style="cursor: pointer;" onclick="toggleRoleOptions()">Birim Değiştir</div>
+                        <div id="roleOptions" style="display: none; margin-top: 10px;">
+                            <a href="javascript:void(0);" class="dropdown-item" onclick="setRoleFilter('Bilgi İşlem Daire Başkanlığı'); updateRoleIndicator('Bilgi İşlem Daire Başkanlığı')">Bilgi İşlem Daire Başkanlığı</a>
+                            <a href="javascript:void(0);" class="dropdown-item" onclick="setRoleFilter('Erasmus Koordinatörlüğü'); updateRoleIndicator('Erasmus Koordinatörlüğü')">Erasmus Koordinatörlüğü</a>
+                        </div>
                     </div>
                 </div>
-            </div>
-        <?php endif; ?>
-    </nav>
-</header>
+            <?php endif; ?>
+        </nav>
+    </header>
 
 <script>
     function updateRoleIndicator(role) {
