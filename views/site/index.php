@@ -2,7 +2,7 @@
 <?php
 /** @var yii\web\View $this */
 
-$this->title = 'PPD';
+$this->title = '';
 ?>
 <div class="site-index">
 
@@ -183,7 +183,7 @@ $this->title = 'PPD';
                 
             </div>
             <div id="yoneticiPanel" class="panel">
-                <a href="<?= \yii\helpers\Url::to(['site/yoneticipaneli']) ?>" class="text-decoration-none">
+                <a href="<?= \yii\helpers\Url::to(['site/kullaniciyonetimi']) ?>" class="text-decoration-none">
                     <h2>Yönetici Paneli</h2>
                 </a>
                 <p>Yönetici olarak giriş yapıldığında bu sayfa açılacak</p>
@@ -217,4 +217,3 @@ $this->title = 'PPD';
         </script>
     </body>
     </html>
-

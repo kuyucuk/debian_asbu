@@ -1,8 +1,10 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-    <meta charset="UTF-8">
-    <title>Kullanıcı Yönetimi</title>
+<?php
+$this->title = 'Yönetim Paneli';
+?>    <meta charset="UTF-8">
+    <title>$title</title>
     <link rel="stylesheet" href="styles.css">
     <style>
         body {

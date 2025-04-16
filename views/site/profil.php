@@ -1,4 +1,7 @@
 <?php
+
+$this->title = 'Profil';
+
 $sicilNo = $_GET['sicilno'] ?? null;
 $name = $_GET['name'] ?? 'Ad';
 $surname = $_GET['surname'] ?? 'Soyad Bilinmiyor';
