@@ -1,5 +1,4 @@
 <?php
-
 namespace app\controllers;
 
 use Yii;
@@ -52,21 +51,25 @@ class SelfAssessmentController extends Controller
                 $userSelfAssessment->improvement_activity = $model->improvement_activity;
 
                 if ($userSelfAssessment->save()) {
-                    Yii::$app->session->setFlash('success', 'Değerlendirmeniz kaydedildi.');
+                    Yii::$app->session->setFlash('success', 'Değerlendirmeniz ve dosyalarınız başarıyla kaydedildi.');
+                    return $this->refresh();
                 } else {
-                    Yii::$app->session->setFlash('error', 'Değerlendirme kaydedilirken bir hata oluştu.');
+                    Yii::$app->session->setFlash('error', 'Değerlendirme kaydedilirken bir hata oluştu: ' . implode(', ', $userSelfAssessment->getFirstErrors()));
+                    return $this->refresh();
                 }
                 
                 // Sertifika dosyalarını kaydet
-                $uploadPath = Yii::getAlias('@webroot/uploads/');
+                $uploadPath = Yii::getAlias('@webroot/uploads/certificates/');
                 if (!is_dir($uploadPath)) {
-                    Yii::$app->session->setFlash('error', 'Yükleme dizinine yazma izni yok.');
-                    return $this->refresh();
-                    mkdir($uploadPath, 0777, true); // uploads klasörü yoksa oluştur
+                    if (!mkdir($uploadPath, 0777, true)) {
+                        Yii::$app->session->setFlash('error', 'Yükleme dizini oluşturulamadı.');
+                        return $this->refresh();
+                    }
                 }
 
 
                 // Dosyaları kaydet ve ilgili tablolara ekle
+                // Dosya-kategori eşleşmesi
                 $uploadedFiles = [
                     'internal_training_count' => $model->internal_training_count,
                     'external_training_count' => $model->external_training_count,
@@ -83,16 +86,16 @@ class SelfAssessmentController extends Controller
                     'education_file' => 'Görevlendirme'
                 ];
                 // Kontrol etmek için
-var_dump($uploadedFiles);
-exit;
+//var_dump($uploadedFiles);
+//exit;
 
                 foreach ($uploadedFiles as $fileAttribute => $file) {
                     if ($file) {
                         $uniqueName = Yii::$app->security->generateRandomString(10) . '.' . $file->extension;
                         $uploadSubPath = 'uploads/certificates/' . $uniqueName;
                         $fullPath = Yii::getAlias('@webroot/' . $uploadSubPath);
-                        //$filePath = $uploadPath . $file->baseName . '.' . $file->extension;
-                        if ($file->saveAs($filePath)) {
+                        //$fullPath = $uploadPath . $file->baseName . '.' . $file->extension;
+                        if ($file->saveAs($fullPath)) {
                             // UserCertificates tablosuna kaydedelim
                             $certificate = new UserCertificates();
                             $certificate->user_id = $userId;
@@ -100,20 +103,20 @@ exit;
                             $certificate->document_file_path  = $uploadSubPath;
                             //yukarıdaki $uploadSubPath; yaılanın yerine önceden yazdığım kod :'/uploads/' . $file->baseName . '.' . $file->extension; //yüklenen dosyanın yolu
                             //yukarıdaki satırda hata olursa aşağıdakini dene
-                            //$certificate->document_file_path = $filePath; // Doğru dosya yolu
+                            //$certificate->document_file_path = $fullPath; // Doğru dosya yolu
                             $certificate->document_type = strtoupper($file->extension); //dosya uzantısı
                             $certificate->document_category = $documentCategories[$fileAttribute] ?? 'Bilinmeyen'; //dosya kategorisi
                             $certificate->uploaded_at = date('Y-m-d H:i:s'); // Yüklenme zamanı
-                            $certificate->save();
+                            //$certificate->save();
                             if ($certificate->save()) {
                                 // Sertifika başarıyla kaydedildi
-                                Yii::$app->session->setFlash('success', 'Sertifika başarıyla kaydedildi.');
+                                Yii::$app->session->addFlash('success', 'Belge (' . $file->name . ') başarıyla kaydedildi.');
                             } else {
-                                Yii::$app->session->setFlash('error', 'Sertifika kaydedilirken bir hata oluştu. Hata: ' . implode(", ", $certificate->errors));
+                                Yii::$app->session->addFlash('error', 'Belge (' . $file->name . ') kaydedilemedi: ' . implode(', ', $certificate->getFirstErrors()));
                             }
                         }
                         else {
-                            Yii::$app->session->setFlash('error', 'Dosya yüklenemedi. Lütfen tekrar deneyin.');
+                            Yii::$app->session->addFlash('error', 'Dosya yüklenemedi. Lütfen tekrar deneyin.' . $file->name);
                         }
                     }
                 }
@@ -121,7 +124,7 @@ exit;
                 return $this->refresh(); // Sayfayı yenileyin
             }
             else {
-                Yii::$app->session->setFlash('error', 'Doğrulama hatası: ' . implode(", ", $model->errors));
+                Yii::$app->session->setFlash('error', 'Doğrulama hatası: ' . implode(", ", $model->getFirstErrors()));
                 return $this->refresh(); // Sayfayı yenileyin
             }
 
@@ -135,4 +138,3 @@ exit;
     }
 
 }
-

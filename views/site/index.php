@@ -1,3 +1,4 @@
+
 <?php
 /** @var yii\web\View $this */
 
@@ -19,6 +20,7 @@ $this->title = 'PPD';
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $email = $_POST['email'];
         $password = $_POST['password'];
+        $userRole = $_POST['user_role'] ?? null; // Formdan gelen rolü al
 
         $stmt = $pdo->prepare("SELECT * FROM users WHERE email = ?");
         $stmt->execute([$email]);
@@ -26,12 +28,21 @@ $this->title = 'PPD';
 
         if ($user && password_verify($password, $user['password'])) {
             $_SESSION['admin'] = $user['id'];
-            header("Location: dashboard.php");
+            //rol tabanlı yönlendirme
+            if ($userRole === 'yonetici') {
+                header("Location: index.php?r=site/yoneticipaneli");
+            } else {
+                header("Location: index.php?r=site/personelpaneli");
+            }
+        
+            //$error = "Geçersiz giriş bilgileri!";
+            //header("Location: dashboard.php");
             exit;
         } else {
             $error = "Geçersiz giriş bilgileri!";
         }
     }
+    
     ?>
 
     <!DOCTYPE html>
@@ -143,7 +154,8 @@ $this->title = 'PPD';
             <form method="POST">
                 <input type="email" name="email" placeholder="E-posta" required><br>
                 <input type="password" name="password" placeholder="Şifre" required><br>
-                
+                <!-- Seçilen rolü PHP'ye gönder -->
+                <input type="hidden" name="user_role" id="user_role" value="personel">
                 <!-- Toggle Switch -->
                 <div class="toggle-container">
                     <label class="switch">
@@ -163,13 +175,15 @@ $this->title = 'PPD';
         <!-- Panels -->
         <div class="panels-container">
             <div id="personelPanel" class="panel">
-                <a href="/index.php?r=site/personelpaneli" class="text-decoration-none">
+                <a href="<?= \yii\helpers\Url::to(['self-assessment/index']) ?>" class="text-decoration-none">
                     <h2>Personel Paneli</h2>
+                    
                 </a>
                 <p>Personel olarak giriş yapıldığında bu sayfa açılacak</p>
+                
             </div>
             <div id="yoneticiPanel" class="panel">
-                <a href="/index.php?r=site/yoneticipaneli" class="text-decoration-none">
+                <a href="<?= \yii\helpers\Url::to(['site/yoneticipaneli']) ?>" class="text-decoration-none">
                     <h2>Yönetici Paneli</h2>
                 </a>
                 <p>Yönetici olarak giriş yapıldığında bu sayfa açılacak</p>
@@ -187,10 +201,12 @@ $this->title = 'PPD';
                     roleLabel.textContent = 'Yönetici';
                     personelPanel.style.display = 'none';
                     yoneticiPanel.style.display = 'block';
+                    document.getElementById('user_role').value = 'yonetici';
                 } else {
                     roleLabel.textContent = 'Personel';
                     personelPanel.style.display = 'block';
                     yoneticiPanel.style.display = 'none';
+                    document.getElementById('user_role').value = 'personel';
                 }
             }
 
@@ -201,3 +217,4 @@ $this->title = 'PPD';
         </script>
     </body>
     </html>
+
