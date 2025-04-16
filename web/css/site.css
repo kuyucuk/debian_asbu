@@ -44,7 +44,7 @@ img {
 
 /* ========== KAPSAYICILAR ========== */
 main > .container, .panel-container {
-    max-width: 1000px;
+    max-width: 2000px; /* Genişlik artırıldı */
     margin: 30px auto;
     padding: 25px;
     background: white;
