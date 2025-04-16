@@ -259,7 +259,7 @@
             });
             const activeHeader = document.querySelector(`th[data-sort-key="${key}"]`);
             activeHeader.querySelector('.sort-indicator').textContent =
-            currentSort.direction === 'asc' ? '▲' : '▼';
+            currentSort.direction === 'asc' ? '▼' : '▲';
 
             // Reset pagination to include all rows
             rows.length = allRows.length;
