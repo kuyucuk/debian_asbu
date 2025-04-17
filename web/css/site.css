@@ -44,7 +44,7 @@ img {
 
 /* ========== KAPSAYICILAR ========== */
 main > .container, .panel-container {
-    max-width: 2000px; /* Genişlik artırıldı */
+    max-width: 3000px; /* Genişlik artırıldı */
     margin: 30px auto;
     padding: 25px;
     background: white;
@@ -203,3 +203,364 @@ button:hover {
     text-align: center;
 }
 
+/* ========== PROFİL STİLLERİ ========== */
+
+/* Profil Sayfası Stilleri */
+
+
+.profile-container {
+    max-width: 800px;
+    margin: 20px auto; /* Ortalamak için margin ayarlandı */
+    padding: 20px;
+    border: 1px solid #ccc;
+    background-color: white;
+    border-radius: 10px;
+}
+
+.profile-header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.profile-photo {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #ccc;
+}
+
+.section-title {
+    font-weight: bold;
+    margin-top: 20px;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 5px;
+}
+
+.profile-item {
+    margin-bottom: 10px;
+}
+
+.profile-item label {
+    font-weight: bold;
+}
+
+.puan-box {
+    margin-top: 10px;
+    padding: 10px;
+    background-color: #eef;
+    border-left: 5px solid #415c92;
+    border-radius: 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.puan-box.green {
+    background-color: #d4edda;
+    border-left-color: #28a745;
+}
+
+.radio-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.button-container {
+    display: flex !important; /* Flex düzeni zorunlu kılındı */
+    justify-content: space-between !important; /* Butonlar arasında boşluk bırakıldı */
+    align-items: center !important;
+    margin-top: 20px;
+    flex-wrap: nowrap !important; /* Butonlar yan yana sıralandı */
+    gap: 10px; /* Butonlar arasında boşluk eklendi */
+}
+
+.profile-container .button-container { /* Özgüllük artırıldı */
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center;
+    margin-top: 20px;
+    gap: 10px;
+    flex-direction: row !important; /* Açıkça yatay yön belirtildi */
+}
+
+.button-container a {
+    text-decoration: none;
+    color: #fff;
+    font-weight: bold;
+    padding: 10px 20px;
+    border-radius: 5px;
+}
+
+.back-button {
+    background-color: #dc3545 !important;
+}
+
+.measurement-button {
+    background-color: #3366cc !important;
+}
+
+.complete-button {
+    background-color: #28a745 !important;
+    transition: background-color 0.3s ease;
+}
+
+.complete-button:active {
+    background-color: #218838;
+}
+
+.success-message {
+    text-align: center;
+    margin-top: 20px;
+    padding: 10px;
+    background-color: #d4edda;
+    color: rgb(88, 190, 112);
+    border-radius: 5px;
+}
+
+/* Profil Değerlendirme Bilgileri Stilleri */
+
+.accordion-header {
+    cursor: pointer;
+    padding: 10px;
+    background: #eef;
+    border-radius: 4px;
+    transition: background 0.3s;
+}
+
+.accordion-header:hover {
+    background: rgb(177, 177, 250);
+}
+
+.accordion-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-out;
+    padding-left: 15px;
+}
+
+.accordion-content.active {
+    max-height: 150px;
+    padding: 10px 15px;
+}
+
+.accordion-content a {
+    display: block;
+    padding: 5px 0;
+    color: var(--primary-color, #007bff);
+    text-decoration: none;
+}
+
+.accordion-content a:hover {
+    text-decoration: underline;
+}
+
+.radio-container {
+    margin-top: 10px;
+}
+
+.approval-checkbox {
+    width: 18px;
+    height: 18px;
+    accent-color: #28a745; /* yeşil tik efekti */
+    cursor: pointer;
+    margin-right: 5px;
+}
+
+.approval-checkbox:checked {
+    box-shadow: 0 0 0 3px rgba(40, 167, 69, 0.3);
+}
+
+
+/* Kullanıcı Yönetimi Sayfası Stilleri */
+body {
+    max-width: 1600px;
+    margin: 0 auto;
+    font-family: Arial, sans-serif;
+    padding: 20px;
+}
+
+h1 {
+    text-align: center;
+    color: var(--primary-color);
+}
+
+.filter-section {
+    margin-bottom: 25px;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.filter-section select {
+    padding: 8px 12px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+}
+
+.rows-per-page {
+    margin-bottom: 20px;
+    text-align: right;
+}
+
+.user-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.user-table th, .user-table td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #eee;
+}
+
+.user-table th {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.user-table tr:hover {
+    background-color: #f5f5f5;
+}
+
+.user-table tbody tr {
+    cursor: pointer;
+}
+
+.back-link {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.back-link a {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.back-link a:hover {
+    text-decoration: underline;
+}
+
+.pagination {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.pagination button {
+    background: #d9b3c4;
+    border: 1px solid #a0527d;
+    padding: 5px 10px;
+    margin: 2px;
+    cursor: pointer;
+    color: var(--primary-color);
+}
+
+.pagination button.active {
+    background: var(--primary-color);
+    color: white;
+    font-weight: bold;
+}
+
+/* index Sayfası Stilleri */
+
+.login-container {
+    text-align: center;
+    margin: 0 auto;
+    max-width: 400px;
+}
+.toggle-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 10px;
+}
+.toggle-label {
+    margin-left: 10px;
+}
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+}
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: .4s;
+    border-radius: 34px;
+}
+.slider:before {
+    position: absolute;
+    content: "";
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    transition: .4s;
+    width: 20px;
+    height: 20px;
+    background-color: white;
+    border-radius: 50%;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+input:checked + .slider {
+    background-color: #2196F3;
+}
+input:checked + .slider:before {
+    left: 35px;
+}
+.panels-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+.panel {
+    text-align: center;
+    margin: 0 20px;
+    display: none;
+}
+.panel h2 {
+    color: #793657;
+    text-decoration: none;
+}
+.button-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    margin-top: 20px;
+}
+.button-container a, .button-container button {
+    display: inline-block;
+    width: 100%;
+    max-width: 200px;
+    padding: 10px;
+    text-align: center;
+    background-color: #793657;
+    color: white;
+    text-decoration: none;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+}
+.button-container a:hover, .button-container button:hover {
+    opacity: 0.9;
+}
+
+.panels-container .button-container { /* Daha spesifik hedefleme */
+    flex-direction: column; 
+}
