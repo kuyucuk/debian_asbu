@@ -1,4 +1,3 @@
-
 <?php
 /** @var yii\web\View $this */
 
@@ -20,7 +19,6 @@ $this->title = '';
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $email = $_POST['email'];
         $password = $_POST['password'];
-        $userRole = $_POST['user_role'] ?? null; // Formdan gelen rolü al
 
         $stmt = $pdo->prepare("SELECT * FROM users WHERE email = ?");
         $stmt->execute([$email]);
@@ -28,21 +26,12 @@ $this->title = '';
 
         if ($user && password_verify($password, $user['password'])) {
             $_SESSION['admin'] = $user['id'];
-            //rol tabanlı yönlendirme
-            if ($userRole === 'yonetici') {
-                header("Location: index.php?r=site/yoneticipaneli");
-            } else {
-                header("Location: index.php?r=site/personelpaneli");
-            }
-        
-            //$error = "Geçersiz giriş bilgileri!";
-            //header("Location: dashboard.php");
+            header("Location: dashboard.php");
             exit;
         } else {
             $error = "Geçersiz giriş bilgileri!";
         }
     }
-    
     ?>
 
     <!DOCTYPE html>
@@ -51,101 +40,7 @@ $this->title = '';
         <meta charset="UTF-8">
         <title>Giriş</title>
         <link rel="stylesheet" href="styles.css">
-        <style>
-            .login-container {
-                text-align: center;
-                margin: 0 auto;
-                max-width: 400px;
-            }
-            .toggle-container {
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                margin-top: 10px;
-            }
-            .toggle-label {
-                margin-left: 10px;
-            }
-            .switch {
-                position: relative;
-                display: inline-block;
-                width: 60px;
-                height: 34px;
-            }
-            .switch input {
-                opacity: 0;
-                width: 0;
-                height: 0;
-            }
-            .slider {
-                position: absolute;
-                cursor: pointer;
-                top: 0;
-                left: 0;
-                right: 0;
-                bottom: 0;
-                background-color: #ccc;
-                transition: .4s;
-                border-radius: 34px;
-            }
-            .slider:before {
-                position: absolute;
-                content: "";
-                left: 10px;
-                top: 50%;
-                transform: translateY(-50%);
-                transition: .4s;
-                width: 20px;
-                height: 20px;
-                background-color: white;
-                border-radius: 50%;
-                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-            }
-            input:checked + .slider {
-                background-color: #2196F3;
-            }
-            input:checked + .slider:before {
-                left: 35px;
-            }
-            .panels-container {
-                display: flex;
-                justify-content: center;
-                margin-top: 20px;
-            }
-            .panel {
-                text-align: center;
-                margin: 0 20px;
-                display: none;
-            }
-            .panel h2 {
-                color: #793657;
-                text-decoration: none;
-            }
-            .button-container {
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                gap: 10px;
-                margin-top: 20px;
-            }
-            .button-container a, .button-container button {
-                display: inline-block;
-                width: 100%;
-                max-width: 200px;
-                padding: 10px;
-                text-align: center;
-                background-color: #793657;
-                color: white;
-                text-decoration: none;
-                border: none;
-                border-radius: 5px;
-                font-size: 16px;
-                cursor: pointer;
-            }
-            .button-container a:hover, .button-container button:hover {
-                opacity: 0.9;
-            }
-        </style>
+
     </head>
     <body>
         <div class="login-container">
@@ -154,8 +49,7 @@ $this->title = '';
             <form method="POST">
                 <input type="email" name="email" placeholder="E-posta" required><br>
                 <input type="password" name="password" placeholder="Şifre" required><br>
-                <!-- Seçilen rolü PHP'ye gönder -->
-                <input type="hidden" name="user_role" id="user_role" value="personel">
+                
                 <!-- Toggle Switch -->
                 <div class="toggle-container">
                     <label class="switch">
@@ -166,6 +60,17 @@ $this->title = '';
                 </div>
 
                 <div class="button-container">
+                    <button type="button" onclick="redirectToPanel();" style="background-color: blue; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer;">Hızlı Giriş</button>
+                    <script>
+                        function redirectToPanel() {
+                            const roleToggle = document.getElementById('roleToggle');
+                            if (roleToggle.checked) {
+                                window.location.href = '/index.php?r=site%2Fkullaniciyonetimi';
+                            } else {
+                                window.location.href = '/index.php?r=self-assessment%2Findex';
+                            }
+                        }
+                    </script>
                     <button type="submit" class="login-button">Giriş Yap</button>
                     <a href="/index.php?r=site/sifreunutma">Şifremi Unuttum</a>
                 </div>
@@ -179,14 +84,14 @@ $this->title = '';
                     <h2>Personel Paneli</h2>
                     
                 </a>
-                <p>Personel olarak giriş yapıldığında bu sayfa açılacak</p>
+                <p>Yönetici amirleriniz tarafından görülecek bilgi ve belgelerinizi yükleyebilir, idari performans ölçüm puanınızı yükseltebilirsiniz.</p>
                 
             </div>
             <div id="yoneticiPanel" class="panel">
                 <a href="<?= \yii\helpers\Url::to(['site/kullaniciyonetimi']) ?>" class="text-decoration-none">
                     <h2>Yönetici Paneli</h2>
                 </a>
-                <p>Yönetici olarak giriş yapıldığında bu sayfa açılacak</p>
+                <p>Yöneticisi olduğunuz birimlerde çalışan personelin bilgilerine ve yüklediği belgelerine ulaşabilir, idari performans ölçümünü değerlendirebilirsiniz.</p>
             </div>
         </div>
 
@@ -201,12 +106,10 @@ $this->title = '';
                     roleLabel.textContent = 'Yönetici';
                     personelPanel.style.display = 'none';
                     yoneticiPanel.style.display = 'block';
-                    document.getElementById('user_role').value = 'yonetici';
                 } else {
                     roleLabel.textContent = 'Personel';
                     personelPanel.style.display = 'block';
                     yoneticiPanel.style.display = 'none';
-                    document.getElementById('user_role').value = 'personel';
                 }
             }
 
@@ -217,3 +120,4 @@ $this->title = '';
         </script>
     </body>
     </html>
+    
