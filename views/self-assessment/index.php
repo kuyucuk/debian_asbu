@@ -3,13 +3,17 @@
 
 use yii\helpers\Html;
 use yii\bootstrap4\ActiveForm;
+use yii\bootstrap4\Alert;
 use yii\widgets\DetailView;
 use yii\web\UploadedFile;
+//use yii\widgets\Pjax;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\SelfAssessmentForm */
 
-//$this->title = 'Son Kullanıcı Değerlendirme Sayfası';
+
+
+$this->title = 'Son Kullanıcı Değerlendirme Sayfası';
 
 ?>
 <div class="self-assessment">
@@ -18,7 +22,8 @@ use yii\web\UploadedFile;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <?php $form = ActiveForm::begin(['id' => 'self-assessment-form', 
-                                    'options' => ['enctype' => 'multipart/form-data']]); ?>
+                                    'options' => ['enctype' => 'multipart/form-data'],
+                                 ]); ?>
 
     <!-- Soru 1: Radio Button Seçimi -->
     <!-- Asbü deki hizmet yılı -->
@@ -32,8 +37,8 @@ use yii\web\UploadedFile;
         ]) ?>
     </div>
 
-    <!-- Soru 2: Radio Button Seçimi -->
-    <!-- eğitim düzeyi(son mezuniyet)-->
+      <!-- Soru 2: Radio Button Seçimi -->
+    <!-- eğitim düzeyi(son mezuniyet)--> 
     <div class="form-group">
         <?= $form->field($model, 'educational_level')->radioList([
             1 => 'ilköğretim/Ortaöğretim',
@@ -55,19 +60,33 @@ use yii\web\UploadedFile;
     (Sunucu olarak yer alma, teknik destek gibi görevlendirme olurları eklenecek)
     *Maksimum 5 tane - her görevlendirme 1 puan -->
     <div class="form-group">
-        <?= $form->field($model, 'internal_training_count')->fileInput(['accept' => 'application/pdf, image/*']) ?>
+    <?= $form->field($model, 'internal_training_files[]')->fileInput([
+            'multiple' => true,
+            'accept' => 'application/pdf, image/*',
+            'class' => 'form-control-file'
+        ]) ?>
     </div>
+
     <!-- Kendi kurumu dışında görev ve hizmet tanımına katkı sağlayacak eğitimlere katılmıştır. 
     (Bu bölümde aynı sene katılınan eğitimlerin sertifikaları yüklenecek)
     *Her bir sertifika 1 puan, maksimum 5 sertifika yüklenecek. -->
     <div class="form-group">
-        <?= $form->field($model, 'external_training_count')->fileInput(['accept' => 'application/pdf, image/*']) ?>
+        <?= $form->field($model, 'external_training_files[]')->fileInput([
+            'multiple' => true,
+            'accept' => 'application/pdf, image/*',
+            'class' => 'form-control-file'
+        ]) ?>
     </div>
+
     <!-- Kişinin ana görevleri haricinde komisyon, kurul, ekip gibi görevlendirmelere sahiptir.
     (KVKK Komisyonu, kalite kurulu, risk komisyonu gibi görevlendirme olurları eklenecek)
     *Maksimum 5 tane - her görevlendirme 1 puan -->
     <div class="form-group">
-        <?= $form->field($model, 'committee_participation_count')->fileInput(['accept' => 'application/pdf, image/*']) ?>
+        <?= $form->field($model, 'committee_participation_files[]')->fileInput([
+            'multiple' => true,
+            'accept' => 'application/pdf, image/*',
+            'class' => 'form-control-file'
+        ]) ?>
     </div>
 
     <!-- Soru 7: Evet / Hayır -->
@@ -79,10 +98,10 @@ use yii\web\UploadedFile;
         ]) ?>
     </div>
    
-<!-- Eğitim verdiyse belgenin yükleneceği alan (başta gizli olacak) -->
-<div id="education-file-upload" style="display:none;">
-    <?= $form->field($model, 'education_file')->fileInput() ?>
-</div>
+    <!-- Eğitim verdiyse belgenin yükleneceği alan (başta gizli olacak) --> 
+    <div id="education-file-upload" style="display:none;">
+        <?= $form->field($model, 'education_file')->fileInput() ?>
+    </div>
 
     <!-- Soru 8: Evet / Hayır -->
     <!-- Kurum kültürünü ve işleyişi geliştirici düzeltici iyileştirici faaliyetlerde bulunmuştur. -->
@@ -92,27 +111,35 @@ use yii\web\UploadedFile;
             0 => 'Hayır',
         ]) ?>
     </div>
+
     <div id="improvement-file-upload" style="display:none;">
-    <?= $form->field($model, 'improvement_file')->fileInput() ?>
-</div>
+        <?= $form->field($model, 'improvement_file')->fileInput() ?>
+    </div>
 
     <!-- Soru 9: Dosya Yükleme -->
     <!-- Kurum içindeki panel, eğitim gibi toplantılara katılım sağlamıştır.
     *Maksimum 5 tane - her katılım 1 puan -->
     <div class="form-group">
-        <?= $form->field($model, 'internal_meeting_count')->fileInput(['accept' => 'application/pdf, image/*']) ?>
+        <?= $form->field($model, 'internal_meeting_files[]')->fileInput([
+            'multiple' => true,
+            'accept' => 'application/pdf, image/*',
+            'class' => 'form-control-file'
+        ]) ?>
     </div>
 
     <!-- Gönder Butonu -->
     <div class="form-group">
         <?= Html::submitButton('Değerlendirmenizi Gönder', ['class' => 'btn btn-primary']) ?>
     </div>
-
+        
     <?php ActiveForm::end(); ?>
+
 </div>
 <?php
+
 $script = <<< JS
     // Sayfa yüklendiğinde belge alanını gizle
+ 
     $('#education-file-upload').hide();
     $('#improvement-file-upload').hide();
 
@@ -135,5 +162,4 @@ $script = <<< JS
         }
     });
 JS;
-
 $this->registerJs($script);

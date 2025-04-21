@@ -27,6 +27,7 @@ class UserDepartment extends ActiveRecord
         return [
             [['user_id', 'department_id', 'role_id'], 'required'],
             [['user_id', 'department_id', 'role_id'], 'integer'],
+            [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::class, 'targetAttribute' => ['user_id' => 'id']],
         ];
     }
 

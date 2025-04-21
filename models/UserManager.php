@@ -24,6 +24,7 @@ class UserManager extends ActiveRecord
         return [
             [['user_id', 'manager_id'], 'required'],
             [['user_id', 'manager_id'], 'integer'],
+            [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::class, 'targetAttribute' => ['user_id' => 'id']],
         ];
     }
 

@@ -1,4 +1,3 @@
-
 <?php
 
 namespace app\models;
@@ -31,6 +30,7 @@ class UserPerformanceScore extends ActiveRecord
     {
         return [
             [['user_id'], 'required'],
+            [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::class, 'targetAttribute' => ['user_id' => 'id']],
             [['user_id', 'service_year_score', 'education_level_score', 
             'foreign_language_score', 'internal_training_score', 
             'external_training_score', 'committee_participation_score', 
