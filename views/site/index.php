@@ -44,7 +44,7 @@ $this->title = '';
     </head>
     <body>
         <div class="login-container">
-            <h2>İDARİ PERSONEL PERFORMANS ÖLÇÜMÜ</h2>
+            <h2>var/www/html/yii2/PPD/12.02.2025/views/site İDARİ PERSONEL PERFORMANS ÖLÇÜMÜ</h2>
             <?php if (isset($error)) echo "<p style='color:red;'>$error</p>"; ?>
             <form method="POST">
                 <input type="email" name="email" placeholder="E-posta" required><br>
